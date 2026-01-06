@@ -15,7 +15,8 @@
     "target": "ES2022",
     "module": "preserve",
     "paths": {
-      "@catalyst-cli/dynamic-widget": ["./dist/@catalyst-cli/dynamic-widget"]
+      "@catalyst-cli/dynamic-widget": ["./dist/@catalyst-cli/dynamic-widget"],
+      "@catalyst-cli/catalyst-stepper": ["./dist/@catalyst-cli/catalyst-stepper"]
     }
   },
   "angularCompilerOptions": {

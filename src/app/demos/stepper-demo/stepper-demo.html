@@ -1,0 +1,69 @@
+<div class="demo-container">
+  <div class="demo-header">
+    <h2>Stepper Demo</h2>
+  </div>
+
+  <div class="demo-content">
+    <div class="demo-section">
+      <h3>Horizontal Stepper</h3>
+      <app-catalyst-stepper
+        [itemMenu]="horizontalMenu()"
+        [orientation]="'horizontal'"
+        [(activeStep)]="horizontalActiveStep"
+        (onStepChange)="onHorizontalStepChange($event)"
+      >
+        @for (menu of horizontalMenu(); track $index) {
+          <app-catalyst-step-body [value]="$index">
+            <div class="step-content">
+              <h4>{{ menu.label }}</h4>
+              <p>{{ menu.description }}</p>
+              <p>This is the content for step {{ $index + 1 }}</p>
+            </div>
+          </app-catalyst-step-body>
+        }
+        <div stepFooter>
+          <div class="demo-controls">
+            <button
+              (click)="goToPrevious()"
+              [disabled]="horizontalActiveStep() === 0"
+            >
+              Previous
+            </button>
+            <button
+              (click)="goToNext()"
+              [disabled]="horizontalActiveStep() === horizontalMenu().length - 1"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </app-catalyst-stepper>
+    </div>
+
+    <div class="demo-section">
+      <h3>Vertical Stepper</h3>
+      <app-catalyst-stepper
+        [itemMenu]="verticalMenu()"
+        [orientation]="'vertical'"
+        [(activeStep)]="verticalActiveStep"
+        (onStepChange)="onVerticalStepChange($event)"
+      >
+        @for (menu of verticalMenu(); track $index) {
+          <app-catalyst-step-body [value]="$index">
+            <div class="step-content">
+              <h4>{{ menu.label }}</h4>
+              <p>{{ menu.description }}</p>
+              <p>This is the content for step {{ $index + 1 }}</p>
+            </div>
+          </app-catalyst-step-body>
+        }
+      </app-catalyst-stepper>
+    </div>
+
+    <div class="demo-info">
+      <p>Horizontal Current Step: {{ horizontalActiveStep() + 1 }}</p>
+      <p>Vertical Current Step: {{ verticalActiveStep() + 1 }}</p>
+      <p>Total Steps: {{ horizontalMenu().length }}</p>
+    </div>
+  </div>
+</div>

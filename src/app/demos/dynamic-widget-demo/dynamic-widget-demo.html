@@ -1,0 +1,17 @@
+<div class="demo-container">
+  <div class="demo-header">
+    <h2>Dynamic Widget Demo</h2>
+    <button class="edit-toggle" (click)="toggleEditMode()">
+      {{ isEditMode() ? 'Exit Edit Mode' : 'Edit Mode' }}
+    </button>
+  </div>
+
+  <div class="demo-content">
+    <ngx-widget
+      [widgets]="widgets()"
+      [isEdit]="isEditMode()"
+      (widgetUpdated)="onWidgetUpdated($event)"
+      (widgetDeleted)="onWidgetDeleted($event)"
+    ></ngx-widget>
+  </div>
+</div>

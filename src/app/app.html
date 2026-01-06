@@ -1,17 +1,38 @@
-<div class="dashboard-container">
-  <header class="dashboard-header">
-    <h1>{{ title() }}</h1>
-    <button class="edit-toggle" (click)="toggleEditMode()">
-      {{ isEditMode() ? 'Exit Edit Mode' : 'Edit Mode' }}
-    </button>
-  </header>
+<div class="app-container">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h1>{{ title() }}</h1>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-title">Components</div>
+        <ul class="nav-menu">
+          <li>
+            <a
+              class="nav-item"
+              [class.active]="isActive('dynamic-widget')"
+              (click)="navigateTo('dynamic-widget'); $event.preventDefault()"
+              href="#"
+            >
+              Dynamic Widget
+            </a>
+          </li>
+          <li>
+            <a
+              class="nav-item"
+              [class.active]="isActive('stepper')"
+              (click)="navigateTo('stepper'); $event.preventDefault()"
+              href="#"
+            >
+              Stepper
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
 
-  <main class="dashboard-content">
-    <ngx-widget
-      [widgets]="widgets()"
-      [isEdit]="isEditMode()"
-      (widgetUpdated)="onWidgetUpdated($event)"
-      (widgetDeleted)="onWidgetDeleted($event)"
-    ></ngx-widget>
+  <main class="main-content">
+    <router-outlet></router-outlet>
   </main>
 </div>

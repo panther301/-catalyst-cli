@@ -1,0 +1,43 @@
+<div
+  class="catalyst-flex catalyst-gap-y-4"
+  [ngClass]="{
+    'catalyst-flex-row': orientation() === 'vertical',
+    'catalyst-flex-col': orientation() === 'horizontal',
+  }"
+>
+  <ol
+    class="c-stepper"
+    [ngClass]="{
+      'c-stepper--vertical': orientation() === 'vertical',
+      'c-stepper--horizontal': orientation() === 'horizontal',
+    }"
+  >
+    @for (menu of itemMenu(); let i = $index; track i) {
+      <li
+        class="c-stepper__item"
+        [ngClass]="{ active: i === activeStep, completed: i < activeStep }"
+        (click)="onClick(i, menu)"
+      >
+        <div class="c-stepper__content">
+          <p class="c-stepper__title">{{ menu.label }}</p>
+          @if (menu?.description) {
+            <p class="c-stepper__desc">{{ menu?.description }}</p>
+          }
+        </div>
+        @if (orientation() === 'horizontal' && i < itemMenu().length - 1) {
+          <div
+            class="c-stepper--horizontal-separator"
+            [ngClass]="{ active: i === activeStep, completed: i < activeStep }"
+          ></div>
+        }
+      </li>
+    }
+  </ol>
+  <div
+    class="catalyst-line"
+    [ngClass]="{
+      'catalyst-line--vertical': orientation() === 'vertical',
+      'catalyst-line--horizontal': orientation() === 'horizontal',
+    }"
+  ></div>
+</div>

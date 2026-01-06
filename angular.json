@@ -85,6 +85,20 @@
           }
         }
       }
+    },
+    "stepper": {
+      "projectType": "library",
+      "root": "projects/@catalyst-cli/catalyst-stepper",
+      "sourceRoot": "projects/@catalyst-cli/catalyst-stepper/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/@catalyst-cli/catalyst-stepper/ng-package.json"
+          }
+        }
+      }
     }
   }
 }

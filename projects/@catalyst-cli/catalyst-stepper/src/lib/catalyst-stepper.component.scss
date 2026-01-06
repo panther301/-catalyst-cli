@@ -1,0 +1,36 @@
+::ng-deep :root {
+  --circle-size: clamp(0.825rem, 5vw, 2rem);
+  --spacing: clamp(0.25rem, 2vw, 0.5rem);
+  --light-blue: #1976d2;
+  --green: #4caf50;
+  --colorText: #1f1f1f;
+  --colorTextDescription: #8c8c8c;
+}
+.wrapper {
+  display: flex;
+
+  height: 100%;
+  &--vertical {
+    flex-direction: row;
+    gap: 2.75rem;
+    padding-top: 2rem;
+  }
+  &--horizontal {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+.c-stepper__body {
+  display: flex;
+  flex-direction: column;
+  &--vertical {
+    width: 80%;
+    padding-right: 3.75rem;
+  }
+  &--horizontal {
+    width: 100%;
+  }
+  .c-stepper__footer {
+    margin-top: 1rem;
+  }
+}
