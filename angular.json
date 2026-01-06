@@ -29,9 +29,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.scss"
-            ]
+            "styles": ["src/styles.scss"]
           },
           "configurations": {
             "production": {
@@ -71,6 +69,20 @@
         },
         "test": {
           "builder": "@angular/build:unit-test"
+        }
+      }
+    },
+    "dynamic-widget": {
+      "projectType": "library",
+      "root": "projects/@catalyst-cli/dynamic-widget",
+      "sourceRoot": "projects/@catalyst-cli/dynamic-widget/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/@catalyst-cli/dynamic-widget/ng-package.json"
+          }
         }
       }
     }

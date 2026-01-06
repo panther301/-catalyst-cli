@@ -1,0 +1,169 @@
+<div class="widget-grid">
+  @for (widget of widgets(); let i = $index; track i) {
+    @if (widget) {
+      <ng-container [ngTemplateOutlet]="widgetOutlet" [ngTemplateOutletContext]="{ widget }" />
+    }
+  }
+</div>
+
+<ng-template #widgetOutlet let-widget="widget">
+  <div
+    class="resizable-widget"
+    [style.left.%]="widget.left"
+    [style.top.%]="widget.top"
+    [style.width.%]="widget.width"
+    [style.height.%]="widget.height"
+  >
+    <div
+      [ngClass]="{ 'widget-content': true, 'cursor-pointer': isEdit() }"
+      (mousedown)="startDrag($event, 'move', widget); $event.stopPropagation()"
+    >
+      @if (widget.component) {
+        <ng-container *ngComponentOutlet="widget.component" />
+      }
+    </div>
+    @if (isEdit()) {
+      <button
+        class="delete-button"
+        (click)="deleteWidget($event, widget.id)"
+        title="Delete widget"
+        type="button"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M3 6h18" />
+          <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+          <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+        </svg>
+      </button>
+
+      <div
+        class="resize-handle top-left"
+        (mousedown)="startDrag($event, 'resize-top-left', widget); $event.stopPropagation()"
+      ></div>
+
+      <!-- Top resize handle with icon -->
+      <div
+        class="resize-handle top"
+        (mousedown)="startDrag($event, 'resize-top', widget); $event.stopPropagation()"
+        title="Resize top"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 5v14" />
+          <path d="M5 12h14" />
+        </svg>
+      </div>
+
+      <!-- Right resize handle with icon -->
+      <div
+        class="resize-handle right"
+        (mousedown)="startDrag($event, 'resize-right', widget); $event.stopPropagation()"
+        title="Resize right"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 5v14" />
+          <path d="M5 12h14" />
+        </svg>
+      </div>
+
+      <!-- Bottom resize handle with icon -->
+      <div
+        class="resize-handle bottom"
+        (mousedown)="startDrag($event, 'resize-bottom', widget); $event.stopPropagation()"
+        title="Resize bottom"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 5v14" />
+          <path d="M5 12h14" />
+        </svg>
+      </div>
+
+      <!-- Left resize handle with icon -->
+      <div
+        class="resize-handle left"
+        (mousedown)="startDrag($event, 'resize-left', widget); $event.stopPropagation()"
+        title="Resize left"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M12 5v14" />
+          <path d="M5 12h14" />
+        </svg>
+      </div>
+
+      <!-- Corner resize handles -->
+      <div
+        class="resize-handle top-left"
+        (mousedown)="startDrag($event, 'resize-top-left', widget); $event.stopPropagation()"
+        title="Resize top-left"
+      ></div>
+
+      <div
+        class="resize-handle top-right"
+        (mousedown)="startDrag($event, 'resize-top-right', widget); $event.stopPropagation()"
+        title="Resize top-right"
+      ></div>
+
+      <div
+        class="resize-handle bottom-right"
+        (mousedown)="startDrag($event, 'resize-bottom-right', widget); $event.stopPropagation()"
+        title="Resize bottom-right"
+      ></div>
+
+      <div
+        class="resize-handle bottom-left"
+        (mousedown)="startDrag($event, 'resize-bottom-left', widget); $event.stopPropagation()"
+        title="Resize bottom-left"
+      ></div>
+    }
+  </div>
+</ng-template>
+
