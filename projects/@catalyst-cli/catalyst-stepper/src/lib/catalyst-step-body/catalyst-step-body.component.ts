@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, model } from '@angular/core';
 
 @Component({
   selector: 'app-catalyst-step-body',
@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
   styleUrl: './catalyst-step-body.component.scss',
 })
 export class CatalystStepBodyComponent {
-  @Input() visible = false;
+  visible = model(false);
   @Input() value!: number;
   @Input() height = '';
 }

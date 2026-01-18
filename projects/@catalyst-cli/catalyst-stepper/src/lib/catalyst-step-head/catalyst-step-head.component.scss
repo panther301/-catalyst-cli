@@ -44,26 +44,41 @@
       align-items: center;
       gap: 1rem;
       padding: 0.5rem;
-    }
 
-    .c-stepper--horizontal-separator {
-      flex: 1 1 0;
-      width: 100%;
-      height: 2px;
-      background-color: rgba(0, 0, 0, 0.06);
-      position: relative;
-      &:before {
+      // Mobile view: center justify
+      @media (max-width: 768px) {
+        justify-content: center;
+      }
+
+      // Horizontal separator using ::after pseudo-element
+      &.has-separator::after {
         content: '';
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 0;
-        height: 100%;
-        background-color: var(--green);
-        transition: width 0.5s ease;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: calc(100% - var(--circle-size));
+        height: 2px;
+        background-color: rgba(0, 0, 0, 0.06);
+        background-image: linear-gradient(to right, var(--green), var(--green));
+        background-size: 0% 100%;
+        background-repeat: no-repeat;
+        z-index: 0;
+        pointer-events: none;
+        transition: background-size 0.5s ease;
+
+        // Normal (desktop) view
+        left: calc(var(--circle-size) + var(--spacing));
+
+        // Mobile view
+        @media (max-width: 768px) {
+          left: calc(50% + var(--circle-size) - var(--spacing) - 0.5rem);
+        }
       }
-      &.completed::before {
-        width: 100%;
+
+      // Show progress when completed
+      &.has-separator.completed::after {
+        background-size: 100% 100%;
       }
     }
   }
@@ -83,6 +98,27 @@
     color: var(--colorTextDescription, #8c8c8c);
     font-weight: 400;
     font-size: 0.825rem;
+  }
+
+  // Mobile-only content view
+  &--mobile {
+    display: none;
+    text-align: center;
+    align-items: center;
+    gap: 0.25rem;
+
+    @media (max-width: 768px) {
+      display: flex;
+    }
+
+    // Mobile letter view for vertical orientation
+    &--mobile-letter {
+      .c-stepper__letter {
+        font-size: 2rem;
+        font-weight: 600;
+        color: var(--light-blue);
+      }
+    }
   }
 }
 .c-stepper__item {
@@ -107,6 +143,7 @@
     justify-content: center;
     align-items: center;
   }
+
   &.active::before {
     color: var(--light-blue);
     border: 2px solid var(--light-blue);
@@ -116,6 +153,71 @@
     content: '\2713';
     color: var(--green);
     border: 2px solid var(--green);
+  }
+
+  // Icon mode - hide counter/checkmark completely when icon is present
+  &--has-icon {
+    &:before {
+      display: none !important;
+      content: none !important;
+    }
+
+    // Ensure completed state doesn't show checkmark
+    &.completed::before {
+      display: none !important;
+      content: none !important;
+    }
+
+    // Ensure active state styling doesn't show counter
+    &.active::before {
+      display: none !important;
+      content: none !important;
+    }
+  }
+}
+
+.c-stepper__icon {
+  flex: 0 0 var(--circle-size);
+  height: var(--circle-size);
+  border-radius: 50%;
+  color: #8c8c8c;
+  border: 2px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.125rem;
+  overflow: hidden;
+
+  .c-stepper__item.active & {
+    color: var(--light-blue);
+    border: 2px solid var(--light-blue);
+  }
+
+  .c-stepper__item.completed & {
+    color: var(--green);
+    border: 2px solid var(--green);
+  }
+
+  // Image icon styles
+  &-img {
+    max-width: 70%;
+    max-height: 70%;
+    object-fit: contain;
+  }
+
+  // SVG and HTML content styles
+  svg {
+    width: 70%;
+    height: 70%;
+    display: block;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -145,5 +247,12 @@
   &--horizontal {
     width: 100%;
     height: 1px;
+  }
+}
+
+// Mobile display none utility class
+.catalyst-hide-mobile {
+  @media (max-width: 768px) {
+    display: none !important;
   }
 }

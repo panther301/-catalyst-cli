@@ -1,12 +1,13 @@
 <div
   class="wrapper"
   [ngClass]="{
-    'wrapper--vertical': orientation() === 'vertical',
-    'wrapper--horizontal': orientation() === 'horizontal',
+    'wrapper--vertical': options().orientation === 'vertical',
+    'wrapper--horizontal': options().orientation === 'horizontal',
   }"
 >
   <app-catalyst-step-head
-    [orientation]="orientation()"
+    [orientation]="options().orientation"
+    [header]="options().header"
     [itemMenu]="itemMenu()"
     [(activeStep)]="activeStep"
     (clickEvent)="setActiveStep($event)"
@@ -14,8 +15,8 @@
   <div
     class="c-stepper__body"
     [ngClass]="{
-      'c-stepper__body--vertical': orientation() === 'vertical',
-      'c-stepper__body--horizontal': orientation() === 'horizontal',
+      'c-stepper__body--vertical': options().orientation === 'vertical',
+      'c-stepper__body--horizontal': options().orientation === 'horizontal',
     }"
   >
     <ng-content select="app-catalyst-step-body"></ng-content>

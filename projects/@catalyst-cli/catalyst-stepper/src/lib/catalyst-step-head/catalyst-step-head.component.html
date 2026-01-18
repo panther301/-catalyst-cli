@@ -13,26 +13,57 @@
     }"
   >
     @for (menu of itemMenu(); let i = $index; track i) {
-      <li
-        class="c-stepper__item"
-        [ngClass]="{ active: i === activeStep, completed: i < activeStep }"
-        (click)="onClick(i, menu)"
-      >
-        <div class="c-stepper__content">
-          <p class="c-stepper__title">{{ menu.label }}</p>
-          @if (menu?.description) {
-            <p class="c-stepper__desc">{{ menu?.description }}</p>
-          }
-        </div>
-        @if (orientation() === 'horizontal' && i < itemMenu().length - 1) {
-          <div
-            class="c-stepper--horizontal-separator"
-            [ngClass]="{ active: i === activeStep, completed: i < activeStep }"
-          ></div>
+    <li
+      class="c-stepper__item"
+      [ngClass]="{
+        active: i === activeStep(),
+        completed: i < activeStep(),
+        'has-separator': orientation() === 'horizontal' && i < itemMenu().length - 1,
+        'c-stepper__item--has-icon': menu.icon
+      }"
+      (click)="onClick(i, menu)"
+    >
+      @if (menu.icon) {
+      <span class="c-stepper__icon">
+        @if (isImagePath(menu.icon)) {
+        <img [src]="menu.icon" alt="Step icon" class="c-stepper__icon-img" />
+        } @else {
+        <span [innerHTML]="getSafeHtml(menu.icon)"></span>
         }
-      </li>
+      </span>
+      } @if (header() === 'column') {
+      <div class="c-stepper__content catalyst-hide-mobile">
+        <p class="c-stepper__title">{{ menu.label }}</p>
+        @if (menu?.description) {
+        <p class="c-stepper__desc">{{ menu?.description }}</p>
+        }
+      </div>
+      } @else {
+      <div class="c-stepper__content catalyst-hide-mobile">
+        <p class="c-stepper__title">{{ menu.label }}</p>
+        @if (menu?.description) {
+        <p class="c-stepper__desc">{{ menu?.description }}</p>
+        }
+      </div>
+      }
+    </li>
     }
   </ol>
+  <!-- Mobile view c-stepper__content -->
+  @if (orientation() === 'horizontal') { @for (menu of itemMenu(); track $index; let i = $index) {
+  @if (i === activeStep()) {
+  <div class="c-stepper__content c-stepper__content--mobile">
+    <p class="c-stepper__title">{{ menu.label }}</p>
+    @if (menu?.description) {
+    <p class="c-stepper__desc">{{ menu?.description }}</p>
+    }
+  </div>
+  } } } @else if (orientation() === 'vertical') { @for (menu of itemMenu(); track $index; let i =
+  $index) { @if (i === activeStep()) {
+  <!-- <div class="c-stepper__content c-stepper__content--mobile c-stepper__content--mobile-letter">
+    <span class="c-stepper__letter">{{ String.fromCharCode(65 + i) }}</span>
+  </div> -->
+  } } }
   <div
     class="catalyst-line"
     [ngClass]="{

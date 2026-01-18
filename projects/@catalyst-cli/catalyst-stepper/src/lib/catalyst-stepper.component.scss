@@ -1,5 +1,5 @@
 ::ng-deep :root {
-  --circle-size: clamp(0.825rem, 5vw, 2rem);
+  --circle-size: clamp(0.825rem, 8vw, 2rem);
   --spacing: clamp(0.25rem, 2vw, 0.5rem);
   --light-blue: #1976d2;
   --green: #4caf50;
@@ -32,5 +32,12 @@
   }
   .c-stepper__footer {
     margin-top: 1rem;
+  }
+}
+
+// Mobile display none utility class
+.catalyst-hide-mobile {
+  @media (max-width: 768px) {
+    display: none !important;
   }
 }

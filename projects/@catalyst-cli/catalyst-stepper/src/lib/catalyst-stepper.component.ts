@@ -1,41 +1,46 @@
 import {
   AfterContentInit,
+  AfterViewInit,
   Component,
   ContentChildren,
   EventEmitter,
-  Input,
   input,
+  model,
   OnChanges,
   Output,
   QueryList,
 } from '@angular/core';
-import {
-  CatalystStepHeadComponent,
-  Orientation,
-} from './catalyst-step-head/catalyst-step-head.component';
+import { CatalystStepHeadComponent } from './catalyst-step-head/catalyst-step-head.component';
 import { CatalystStepBodyComponent } from './catalyst-step-body/catalyst-step-body.component';
 import { CommonModule } from '@angular/common';
-
-export interface StepperMenu {
-  label: string;
-  description?: string;
-  disabled?: boolean;
-}
+import {
+  StepperMenu,
+  Orientation,
+  IStepperOptions,
+  OrientationType,
+  HeaderType,
+} from './catalyst-stepper.model';
 @Component({
   selector: 'app-catalyst-stepper',
   imports: [CatalystStepHeadComponent, CommonModule],
   templateUrl: './catalyst-stepper.component.html',
   styleUrl: './catalyst-stepper.component.scss',
 })
-export class CatalystStepperComponent implements AfterContentInit, OnChanges {
+export class CatalystStepperComponent implements AfterContentInit, OnChanges, AfterViewInit {
   itemMenu = input.required<StepperMenu[]>();
-  orientation = input<Orientation>('vertical');
+  options = input<IStepperOptions>({
+    orientation: OrientationType.DEFAULT,
+    header: HeaderType.DEFAULT,
+  });
   @ContentChildren(CatalystStepBodyComponent) stepBodies!: QueryList<CatalystStepBodyComponent>;
 
   height = input<string>('');
-  @Input() activeStep = 0;
-  @Output() activeStepChange = new EventEmitter<number>();
+  activeStep = model(0);
   @Output() onStepChange = new EventEmitter<number>();
+
+  ngAfterViewInit(): void {
+    this.updateActiveBodies();
+  }
 
   ngAfterContentInit() {
     this.updateActiveBodies();
@@ -46,16 +51,15 @@ export class CatalystStepperComponent implements AfterContentInit, OnChanges {
   }
 
   setActiveStep(index: number): void {
-    this.activeStep = index;
+    this.activeStep.set(index);
     this.updateActiveBodies();
-    this.activeStepChange.emit(index);
     this.onStepChange.emit(index);
   }
 
   private updateActiveBodies(): void {
     if (this.stepBodies)
       this.stepBodies.forEach((body) => {
-        body.visible = body.value === this.activeStep;
+        body.visible.set(body.value === this.activeStep());
       });
   }
 }

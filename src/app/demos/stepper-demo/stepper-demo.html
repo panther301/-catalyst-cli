@@ -1,6 +1,20 @@
 <div class="demo-container">
   <div class="demo-header">
-    <h2>Stepper Demo</h2>
+    <div class="demo-header-content">
+      <div class="demo-logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="8" fill="url(#gradient-stepper)" />
+          <path d="M16 8L24 16L16 24L8 16L16 8Z" fill="white" opacity="0.9" />
+          <defs>
+            <linearGradient id="gradient-stepper" x1="0" y1="0" x2="32" y2="32">
+              <stop offset="0%" stop-color="#667eea" />
+              <stop offset="100%" stop-color="#764ba2" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <h2>Stepper Demo</h2>
+    </div>
   </div>
 
   <div class="demo-content">
@@ -8,25 +22,25 @@
       <h3>Horizontal Stepper</h3>
       <app-catalyst-stepper
         [itemMenu]="horizontalMenu()"
-        [orientation]="'horizontal'"
+        [options]="{
+          orientation: 'horizontal',
+          header: 'column',
+        }"
         [(activeStep)]="horizontalActiveStep"
         (onStepChange)="onHorizontalStepChange($event)"
       >
         @for (menu of horizontalMenu(); track $index) {
-          <app-catalyst-step-body [value]="$index">
-            <div class="step-content">
-              <h4>{{ menu.label }}</h4>
-              <p>{{ menu.description }}</p>
-              <p>This is the content for step {{ $index + 1 }}</p>
-            </div>
-          </app-catalyst-step-body>
+        <app-catalyst-step-body [value]="$index">
+          <div class="step-content">
+            <h4>{{ menu.label }}</h4>
+            <p>{{ menu.description }}</p>
+            <p>This is the content for step {{ $index + 1 }}</p>
+          </div>
+        </app-catalyst-step-body>
         }
         <div stepFooter>
           <div class="demo-controls">
-            <button
-              (click)="goToPrevious()"
-              [disabled]="horizontalActiveStep() === 0"
-            >
+            <button (click)="goToPrevious()" [disabled]="horizontalActiveStep() === 0">
               Previous
             </button>
             <button
@@ -41,21 +55,38 @@
     </div>
 
     <div class="demo-section">
-      <h3>Vertical Stepper</h3>
+      <div class="demo-stepper-vertical-header">
+        <h3>Vertical Stepper</h3>
+        <div class="demo-controls">
+          <button (click)="goToVerticalPrevious()" [disabled]="verticalActiveStep() === 0">
+            Previous
+          </button>
+          <button
+            (click)="goToVerticalNext()"
+            [disabled]="verticalActiveStep() === verticalMenu().length - 1"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+
       <app-catalyst-stepper
         [itemMenu]="verticalMenu()"
-        [orientation]="'vertical'"
+        [options]="{
+          orientation: 'vertical',
+          header: 'row',
+        }"
         [(activeStep)]="verticalActiveStep"
         (onStepChange)="onVerticalStepChange($event)"
       >
         @for (menu of verticalMenu(); track $index) {
-          <app-catalyst-step-body [value]="$index">
-            <div class="step-content">
-              <h4>{{ menu.label }}</h4>
-              <p>{{ menu.description }}</p>
-              <p>This is the content for step {{ $index + 1 }}</p>
-            </div>
-          </app-catalyst-step-body>
+        <app-catalyst-step-body [value]="$index">
+          <div class="step-content">
+            <h4>{{ menu.label }}</h4>
+            <p>{{ menu.description }}</p>
+            <p>This is the content for step {{ $index + 1 }}</p>
+          </div>
+        </app-catalyst-step-body>
         }
       </app-catalyst-stepper>
     </div>
