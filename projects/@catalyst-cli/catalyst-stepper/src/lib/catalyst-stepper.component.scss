@@ -5,6 +5,8 @@
   --green: #4caf50;
   --colorText: #1f1f1f;
   --colorTextDescription: #8c8c8c;
+  --active-stepper-color: var(--light-blue);
+  --completed-stepper-color: var(--green);
 }
 .wrapper {
   display: flex;
