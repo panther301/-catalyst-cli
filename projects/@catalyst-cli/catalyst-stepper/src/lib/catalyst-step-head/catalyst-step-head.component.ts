@@ -31,9 +31,36 @@ export class CatalystStepHeadComponent {
 
   /**
    * Sanitize HTML content to allow SVG and other HTML to render
+   * Also converts Unicode escape sequences to actual characters
    */
   getSafeHtml(html: string): SafeHtml {
-    return this.sanitizer.bypassSecurityTrustHtml(html);
+    const converted = this.convertUnicodeToChar(html);
+    return this.sanitizer.bypassSecurityTrustHtml(converted);
+  }
+
+  /**
+   * Convert Unicode escape sequences to actual characters
+   * Supports formats: \1F60A, \u1F60A, &#x1F60A;
+   */
+  convertUnicodeToChar(str: string): string {
+    if (!str) return str;
+
+    // Convert \1F60A format (backslash + hex code)
+    str = str.replace(/\\([0-9A-Fa-f]{4,6})\s*/g, (match, hex) => {
+      return String.fromCodePoint(parseInt(hex, 16));
+    });
+
+    // Convert \u1F60A format (backslash + u + hex code)
+    str = str.replace(/\\u([0-9A-Fa-f]{4,6})/g, (match, hex) => {
+      return String.fromCodePoint(parseInt(hex, 16));
+    });
+
+    // Convert &#x1F60A; format (HTML entity)
+    str = str.replace(/&#x([0-9A-Fa-f]+);/g, (match, hex) => {
+      return String.fromCodePoint(parseInt(hex, 16));
+    });
+
+    return str;
   }
 
   /**

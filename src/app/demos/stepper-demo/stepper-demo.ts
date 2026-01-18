@@ -50,7 +50,7 @@ export class StepperDemo {
       label: 'Account Setup',
       description: 'Create your account',
       disabled: false,
-      icon: '👤',
+      icon: '\\1F60A ',
     },
     {
       label: 'Profile Details',
