@@ -1,3 +1,30 @@
+@use 'sass:map';
+
+// -----------------------------------------------------------------------------
+// Component Configuration
+// -----------------------------------------------------------------------------
+$config: (
+  breakpoints: (
+    mobile: 768px,
+  ),
+  layout: (
+    vertical-gap: 2.75rem,
+    horizontal-gap: 1.5rem,
+  ),
+);
+
+// -----------------------------------------------------------------------------
+// Mixins & Functions
+// -----------------------------------------------------------------------------
+@mixin mobile {
+  @media (max-width: map.get(map.get($config, breakpoints), mobile)) {
+    @content;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Global Variables (Design System)
+// -----------------------------------------------------------------------------
 ::ng-deep :root {
   --circle-size: clamp(0.825rem, 8vw, 2rem);
   --spacing: clamp(0.25rem, 2vw, 0.5rem);
@@ -8,38 +35,53 @@
   --active-stepper-color: var(--light-blue);
   --completed-stepper-color: var(--green);
 }
+
+// -----------------------------------------------------------------------------
+// Main Layout
+// -----------------------------------------------------------------------------
+:host {
+  display: block;
+}
+
 .wrapper {
   display: flex;
-
   height: 100%;
+
   &--vertical {
     flex-direction: row;
-    gap: 2.75rem;
+    gap: map.get(map.get($config, layout), vertical-gap);
     padding-top: 2rem;
   }
+
   &--horizontal {
     flex-direction: column;
-    gap: 1.5rem;
+    gap: map.get(map.get($config, layout), horizontal-gap);
   }
 }
+
 .c-stepper__body {
   display: flex;
   flex-direction: column;
+
   &--vertical {
     width: 80%;
     padding-right: 3.75rem;
   }
+
   &--horizontal {
     width: 100%;
   }
+
   .c-stepper__footer {
     margin-top: 1rem;
   }
 }
 
-// Mobile display none utility class
+// -----------------------------------------------------------------------------
+// Utilities
+// -----------------------------------------------------------------------------
 .catalyst-hide-mobile {
-  @media (max-width: 768px) {
+  @include mobile {
     display: none !important;
   }
 }
