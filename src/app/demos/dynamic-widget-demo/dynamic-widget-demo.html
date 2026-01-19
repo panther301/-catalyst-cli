@@ -1,31 +1,273 @@
 <div class="demo-container">
   <div class="demo-header">
     <div class="demo-header-content">
-      <div class="demo-logo">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <rect width="32" height="32" rx="8" fill="url(#gradient)" />
-          <path d="M16 8L24 16L16 24L8 16L16 8Z" fill="white" opacity="0.9" />
-          <defs>
-            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
-              <stop offset="0%" stop-color="#667eea" />
-              <stop offset="100%" stop-color="#764ba2" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-      <h2>Dynamic Widget Demo</h2>
+      <h2>Catalyst Dynamic Widget Demo</h2>
     </div>
-    <button class="edit-toggle" (click)="toggleEditMode()">
-      {{ isEditMode() ? 'Exit Edit Mode' : 'Edit Mode' }}
-    </button>
   </div>
 
   <div class="demo-content">
-    <ngx-widget
-      [widgets]="widgets()"
-      [isEdit]="isEditMode()"
-      (widgetUpdated)="onWidgetUpdated($event)"
-      (widgetDeleted)="onWidgetDeleted($event)"
-    ></ngx-widget>
+    <catalyst-tab-group [tabGroupConfig]="mainConfig" [(selectedIndex)]="mainIndex">
+      <!-- Overview Tab -->
+      <catalyst-tab label="Overview">
+        <div class="overview-section">
+          <p>
+            Catalyst Dynamic Widget is a powerful Angular library for creating customizable,
+            draggable, and resizable dashboard widgets. Build dynamic layouts where users can
+            arrange and resize widgets to fit their needs.
+          </p>
+          <p>
+            Perfect for admin dashboards, analytics platforms, or any application requiring
+            flexible, user-configurable layouts.
+          </p>
+
+          <div class="feature-section">
+            <h3>Why Catalyst Dynamic Widget?</h3>
+            <div class="divider"></div>
+            <p>Key features include:</p>
+            <ul>
+              <li>Drag and drop widget positioning</li>
+              <li>Multi-directional resizing (8 handles)</li>
+              <li>Percentage-based grid system (0-100%)</li>
+              <li>Dynamic component loading</li>
+              <li>Configurable constraints (min/max sizes)</li>
+              <li>Edit mode toggle</li>
+              <li>Widget locking and deletion</li>
+              <li>Metadata and custom data support</li>
+              <li>Built with Angular Signals</li>
+              <li>Standalone components</li>
+            </ul>
+          </div>
+
+          <div class="feature-section">
+            <h3>How to use?</h3>
+            <div class="divider"></div>
+
+            <h4>1) Install the package</h4>
+            <pre><code>npm install @catalyst-cli/dynamic-widget</code></pre>
+
+            <h4>2) Import the widget component</h4>
+            <pre><code>{{ importCode }}</code></pre>
+
+            <h4>3) Create your custom widget components</h4>
+            <pre><code>{{ customWidgetCode }}</code></pre>
+
+            <h4>4) Initialize widgets in your component</h4>
+            <pre><code>{{ initWidgetsCode }}</code></pre>
+
+            <h4>5) Add to your template</h4>
+            <pre><code>{{ templateCode }}</code></pre>
+          </div>
+        </div>
+      </catalyst-tab>
+
+      <!-- Examples Tab -->
+      <catalyst-tab label="Examples">
+        <div class="examples-section">
+          <!-- Example 1: Interactive Dashboard -->
+          <div class="example-block">
+            <h3>Example 1: Interactive Dashboard</h3>
+            <p>Try the widget system! Toggle edit mode to drag, resize, and delete widgets:</p>
+
+            <div class="example-demo">
+              <div class="demo-area">
+                <div class="demo-controls-header">
+                  <button class="demo-button" (click)="toggleEditMode()">
+                    {{ isEditMode() ? '🔒 Exit Edit Mode' : '✏️ Edit Mode' }}
+                  </button>
+                  <button class="demo-button secondary" (click)="openSidePanel()">
+                    ➕ Manage Widgets
+                  </button>
+                  <p><strong>Mode:</strong> {{ isEditMode() ? 'Editing' : 'Viewing' }}</p>
+                </div>
+
+                <!-- Side Panel -->
+                <div class="side-panel" [class.open]="sidePanelOpen()">
+                  <div class="side-panel-header">
+                    <h3>Available Widgets</h3>
+                    <button class="close-btn" (click)="closeSidePanel()">✕</button>
+                  </div>
+                  <div class="side-panel-content">
+                    <p class="panel-description">Check widgets to display them on the dashboard:</p>
+                    @for (widget of availableWidgets; track widget.id) {
+                      <div class="widget-item">
+                        <label>
+                          <input
+                            type="checkbox"
+                            [checked]="isWidgetDisplayed(widget.id)"
+                            (change)="toggleWidget(widget.id)"
+                          />
+                          <div class="widget-info">
+                            <span class="widget-name">{{ widget.name }}</span>
+                            <span class="widget-desc">{{ widget.description }}</span>
+                          </div>
+                        </label>
+                      </div>
+                    }
+                  </div>
+                </div>
+
+                <!-- Backdrop -->
+                @if (sidePanelOpen()) {
+                  <div class="backdrop" (click)="closeSidePanel()"></div>
+                }
+
+                <div class="widget-container">
+                  <ngx-widget
+                    [widgets]="widgets()"
+                    [isEdit]="isEditMode()"
+                    (widgetUpdated)="onWidgetUpdated($event)"
+                    (widgetDeleted)="onWidgetDeleted($event)"
+                  >
+                  </ngx-widget>
+                </div>
+              </div>
+
+              <div class="code-area">
+                <catalyst-tab-group>
+                  <catalyst-tab label="component.ts">
+                    <pre><code>{{ dashboardTsCode }}</code></pre>
+                  </catalyst-tab>
+                  <catalyst-tab label="component.html">
+                    <pre><code>{{ dashboardHtmlCode }}</code></pre>
+                  </catalyst-tab>
+                </catalyst-tab-group>
+              </div>
+            </div>
+          </div>
+
+          <!-- Example 2: Widget Configuration -->
+          <div class="example-block">
+            <h3>Example 2: Widget Constraints</h3>
+            <p>
+              Widgets can have constraints like min/max sizes, locked positions, or restricted
+              deletion:
+            </p>
+
+            <div class="code-snippet">
+              <pre><code>{{ constraintsCode }}</code></pre>
+            </div>
+          </div>
+        </div>
+      </catalyst-tab>
+
+      <!-- API Reference Tab -->
+      <catalyst-tab label="API Reference">
+        <div class="api-section">
+          <h3>WidgetComponent API</h3>
+          <div class="divider"></div>
+
+          <h4>Inputs</h4>
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>widgets</code></td>
+                <td><code>IWidget[]</code></td>
+                <td><code>[]</code></td>
+                <td>Array of widget configurations to display</td>
+              </tr>
+              <tr>
+                <td><code>isEdit</code></td>
+                <td><code>boolean</code></td>
+                <td><code>false</code></td>
+                <td>Enable/disable edit mode (drag, resize, delete)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4 class="mt-4">Outputs</h4>
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>widgetUpdated</code></td>
+                <td><code>EventEmitter&lt;IWidgetUpdateEvent&gt;</code></td>
+                <td>Emitted when widget position/size changes during drag/resize</td>
+              </tr>
+              <tr>
+                <td><code>widgetDeleted</code></td>
+                <td><code>EventEmitter&lt;number&gt;</code></td>
+                <td>Emitted when widget is deleted (provides widget ID)</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4 class="mt-4">Interfaces</h4>
+          <pre><code>{{ interfacesCode }}</code></pre>
+
+          <h3 class="mt-5">WidgetService API</h3>
+          <div class="divider"></div>
+
+          <h4>Methods</h4>
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Parameters</th>
+                <th>Returns</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>createWidget()</code></td>
+                <td><code>id: number, options: IWidgetCreateOptions</code></td>
+                <td><code>IWidget</code></td>
+                <td>Creates a new widget with the specified configuration</td>
+              </tr>
+              <tr>
+                <td><code>updateWidget()</code></td>
+                <td><code>widget: IWidget, event: IWidgetUpdateEvent</code></td>
+                <td><code>IWidget | null</code></td>
+                <td>Updates widget position/size from drag/resize event</td>
+              </tr>
+              <tr>
+                <td><code>removeWidget()</code></td>
+                <td><code>widgets: IWidget[], id: number</code></td>
+                <td><code>IWidget[]</code></td>
+                <td>Removes widget from array and returns updated array</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4 class="mt-4">Usage Notes</h4>
+          <div class="usage-notes">
+            <p>
+              <strong>Grid System:</strong> Widgets use percentage-based positioning (0-100%) for
+              responsive layouts.
+            </p>
+            <p>
+              <strong>Edit Mode:</strong> Users can only drag, resize, or delete widgets when
+              <code>isEdit</code> is <code>true</code>.
+            </p>
+            <p>
+              <strong>Resize Handles:</strong> 8 resize handles (corners + edges) appear in edit
+              mode for precise sizing.
+            </p>
+            <p>
+              <strong>Constraints:</strong> Use <code>IWidgetConstraints</code> to limit min/max
+              sizes or disable drag/resize/delete.
+            </p>
+            <p>
+              <strong>Dynamic Components:</strong> Any Angular component can be loaded inside a
+              widget via the <code>component</code> property.
+            </p>
+          </div>
+        </div>
+      </catalyst-tab>
+    </catalyst-tab-group>
   </div>
 </div>

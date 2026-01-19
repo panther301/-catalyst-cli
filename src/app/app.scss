@@ -59,7 +59,9 @@
   z-index: 999;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
+  transition:
+    opacity 0.3s,
+    visibility 0.3s;
 
   &.active {
     opacity: 1;
@@ -80,7 +82,9 @@
   flex-direction: column;
   z-index: 1000;
   overflow: hidden;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition:
+    width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   // Mobile: hidden by default, slides in when open
   @media (max-width: 767px) {
@@ -214,7 +218,8 @@
 }
 
 .sidebar-header {
-  padding: 1.5rem;
+  height: 80px; // Fixed height for consistency
+  padding: 0 1.5rem; // Remove vertical padding, stick to height
   border-bottom: 1px solid #e8eaed;
   display: flex;
   justify-content: space-between;
@@ -240,7 +245,10 @@
   .brand-text {
     flex: 1;
     min-width: 0;
-    transition: opacity 0.2s ease, visibility 0.2s ease, width 0.3s ease;
+    transition:
+      opacity 0.2s ease,
+      visibility 0.2s ease,
+      width 0.3s ease;
 
     h1 {
       margin: 0;
@@ -328,7 +336,10 @@
 
   span {
     flex: 1;
-    transition: opacity 0.2s ease, visibility 0.2s ease, width 0.3s ease;
+    transition:
+      opacity 0.2s ease,
+      visibility 0.2s ease,
+      width 0.3s ease;
   }
 }
 
@@ -394,7 +405,10 @@
     flex-direction: column;
     gap: 0.125rem;
     min-width: 0;
-    transition: opacity 0.2s ease, visibility 0.2s ease, width 0.3s ease;
+    transition:
+      opacity 0.2s ease,
+      visibility 0.2s ease,
+      width 0.3s ease;
   }
 
   .nav-item-title {
