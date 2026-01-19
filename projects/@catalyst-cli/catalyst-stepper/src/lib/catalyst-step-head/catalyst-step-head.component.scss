@@ -19,7 +19,7 @@
           z-index: 0;
           transform: translateX(calc(var(--circle-size) / 2));
           width: 2px;
-          background-color: rgba(0, 0, 0, 0.06);
+          background-color: rgba(0, 0, 0, 0.1);
           background-image: linear-gradient(
             to bottom,
             var(--completed-stepper-color),
@@ -70,7 +70,7 @@
         transform: translateY(-50%);
         width: calc(100% - var(--circle-size));
         height: 2px;
-        background-color: rgba(0, 0, 0, 0.06);
+        background-color: rgba(0, 0, 0, 0.1);
         background-image: linear-gradient(
           to right,
           var(--completed-stepper-color),
@@ -153,7 +153,7 @@
     height: var(--circle-size);
     border-radius: 50%;
     color: #8c8c8c;
-    border: 2px solid rgba(0, 0, 0, 0.06);
+    border: 2px solid rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -196,7 +196,7 @@
   height: var(--circle-size);
   border-radius: 50%;
   color: #8c8c8c;
-  border: 2px solid rgba(0, 0, 0, 0.06);
+  border: 2px solid rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -253,7 +253,7 @@
 }
 
 .catalyst-line {
-  background-color: rgba(0, 0, 0, 0.06);
+  background-color: rgba(0, 0, 0, 0.1);
 
   &--vertical {
     width: 1px;
