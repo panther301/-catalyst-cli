@@ -99,6 +99,35 @@
           }
         }
       }
+    },
+    "catalyst-tab": {
+      "projectType": "library",
+      "root": "projects/@catalyst-cli/catalyst-tab",
+      "sourceRoot": "projects/@catalyst-cli/catalyst-tab/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/@catalyst-cli/catalyst-tab/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/@catalyst-cli/catalyst-tab/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/@catalyst-cli/catalyst-tab/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/@catalyst-cli/catalyst-tab/tsconfig.spec.json"
+          }
+        }
+      }
     }
   }
 }

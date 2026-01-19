@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "build:lib:dynamic-widget": "ng build dynamic-widget",
-    "build:lib:stepper": "ng build stepper"
+    "build:lib:stepper": "ng build stepper",
+    "build:lib:tab": "ng build catalyst-tab"
   },
   "prettier": {
     "printWidth": 100,

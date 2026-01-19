@@ -138,6 +138,36 @@
               </div>
             </a>
           </li>
+          <li>
+            <a
+              class="nav-item"
+              [class.active]="isActive('tabs')"
+              (click)="navigateTo('tabs'); $event.preventDefault()"
+              href="#"
+              data-tooltip="Tabs"
+            >
+              <div class="nav-item-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M21 7h-18"></path>
+                  <path d="M18 10l-3 -3l-3 3"></path>
+                  <path
+                    d="M6 20h12a2 2 0 0 0 2 -2v-9a2 2 0 0 0 -2 -2h-12a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2z"
+                  ></path>
+                </svg>
+              </div>
+              <div class="nav-item-content">
+                <span class="nav-item-title">Tabs</span>
+                <span class="nav-item-description">Tabbed interface</span>
+              </div>
+            </a>
+          </li>
         </ul>
       </div>
     </nav>

@@ -1,0 +1,166 @@
+@use 'sass:map';
+
+// Configuration
+$tab-config: (
+  height: 50px,
+  bg: #fff,
+  border-color: #eee,
+  active-color: #006080,
+  active-bg: #f6fafd,
+  active-border: #008cba,
+  text-color: #7f92a3,
+  hover-bg: #f6fafd,
+);
+
+// Initialize CSS Variables
+:host {
+  display: block; // Needed for standalone
+
+  @each $key, $value in $tab-config {
+    --tab-#{$key}: #{$value};
+  }
+}
+
+// Mixins
+@mixin tab-list-reset {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+@mixin tab-item-base {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: var(--tab-text-color);
+  padding: 16px;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 500;
+
+  &:focus-visible {
+    outline: 2px solid var(--tab-active-border);
+    outline-offset: -2px;
+  }
+}
+
+@mixin active-hover-state($transition: false) {
+  @if $transition {
+    transition: all 300ms linear;
+  }
+  border-bottom: 2px solid var(--tab-active-border);
+  color: var(--tab-active-color);
+  background-color: var(--tab-active-bg);
+}
+
+// Main Components
+.tab-menu {
+  background-color: var(--tab-bg);
+  width: 100%;
+  border-bottom: 2px solid var(--tab-border-color);
+  height: var(--tab-height);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+
+  ul {
+    @include tab-list-reset;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    transition: transform 300ms ease-in-out;
+    padding-left: 2em;
+
+    .active,
+    .hover {
+      @include active-hover-state($transition: true);
+    }
+
+    li {
+      @include tab-item-base;
+      height: 100%;
+      min-width: 120px;
+      flex-shrink: 0;
+    }
+  }
+}
+
+.tab-vertical-menu {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--tab-bg);
+  width: 120px;
+  border-right: 2px solid var(--tab-border-color);
+  min-height: 200px;
+  flex-shrink: 0;
+  float: left;
+
+  ul {
+    @include tab-list-reset;
+
+    .active,
+    .hover {
+      @include active-hover-state;
+    }
+
+    li {
+      @include tab-item-base;
+      height: var(--tab-height);
+      width: 100%;
+    }
+  }
+}
+
+.vertical-content {
+  flex-grow: 1;
+  padding: 0 12px;
+  min-width: 50%;
+  border-left: none;
+  min-height: 250px;
+  overflow: hidden;
+}
+
+.change-btn {
+  height: var(--tab-height);
+  width: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  background: white;
+  cursor: pointer;
+  p {
+    font-size: 36px;
+    margin: 0;
+  }
+
+  &.hide {
+    visibility: hidden;
+  }
+
+  &.shadow {
+    box-shadow: none !important;
+    color: rgba(0, 0, 0, 0.38);
+  }
+
+  &.prev {
+    left: 0;
+    &:hover {
+      background-color: var(--tab-hover-bg);
+    }
+  }
+
+  &.next {
+    right: 0;
+    &:hover {
+      background-color: var(--tab-hover-bg);
+    }
+  }
+}

@@ -16,6 +16,7 @@
     "module": "preserve",
     "paths": {
       "@catalyst-cli/dynamic-widget": ["./dist/@catalyst-cli/dynamic-widget"],
+      "@catalyst-cli/catalyst-tab": ["./dist/@catalyst-cli/catalyst-tab"],
       "@catalyst-cli/catalyst-stepper": ["./dist/@catalyst-cli/catalyst-stepper"]
     }
   },
