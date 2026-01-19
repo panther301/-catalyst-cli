@@ -17,7 +17,10 @@ $config: (
 // Mixins & Functions
 // -----------------------------------------------------------------------------
 @mixin mobile {
-  @media (max-width: map.get(map.get($config, breakpoints), mobile)) {
+  @media (max-width: #{map.get(map.get($config, breakpoints), mobile)}) {
+    @content;
+  }
+  @container stepper (max-width: #{map.get(map.get($config, breakpoints), mobile)}) {
     @content;
   }
 }
@@ -41,6 +44,8 @@ $config: (
 // -----------------------------------------------------------------------------
 :host {
   display: block;
+  container-type: inline-size;
+  container-name: stepper;
 }
 
 .wrapper {

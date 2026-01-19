@@ -7,118 +7,342 @@
           <path d="M16 8L24 16L16 24L8 16L16 8Z" fill="white" opacity="0.9" />
           <defs>
             <linearGradient id="gradient-stepper" x1="0" y1="0" x2="32" y2="32">
-              <stop offset="0%" stop-color="#667eea" />
-              <stop offset="100%" stop-color="#764ba2" />
+              <stop offset="0%" stop-color="#f093fb" />
+              <stop offset="100%" stop-color="#f5576c" />
             </linearGradient>
           </defs>
         </svg>
       </div>
-      <h2>Stepper Demo</h2>
+      <h2>Catalyst Stepper Demo</h2>
     </div>
   </div>
 
   <div class="demo-content">
-    <div class="demo-section">
-      <div class="demo-section-header">
-        <h3>Horizontal Stepper</h3>
-        <div class="demo-option-controls">
-          <label>
-            <input
-              type="radio"
-              name="headerAlignment"
-              value="row"
-              [ngModel]="headerAlignment()"
-              (ngModelChange)="headerAlignment.set($event)"
-            />
-            Row
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="headerAlignment"
-              value="column"
-              [ngModel]="headerAlignment()"
-              (ngModelChange)="headerAlignment.set($event)"
-            />
-            Column
-          </label>
-        </div>
-      </div>
-      <app-catalyst-stepper
-        [itemMenu]="horizontalMenu()"
-        [options]="{
-          orientation: 'horizontal',
-          header: headerAlignment(),
-        }"
-        [(activeStep)]="horizontalActiveStep"
-        (onStepChange)="onHorizontalStepChange($event)"
-      >
-        @for (menu of horizontalMenu(); track $index) {
-          <app-catalyst-step-body [value]="$index">
-            <div class="step-content">
-              <h4>{{ menu.label }}</h4>
-              <p>{{ menu.description }}</p>
-              <p>This is the content for step {{ $index + 1 }}</p>
-            </div>
-          </app-catalyst-step-body>
-        }
-        <div stepFooter>
-          <div class="demo-controls">
-            <button (click)="goToPrevious()" [disabled]="horizontalActiveStep() === 0">
-              Previous
-            </button>
-            <button
-              (click)="goToNext()"
-              [disabled]="horizontalActiveStep() === horizontalMenu().length - 1"
-            >
-              Next
-            </button>
+    <catalyst-tab-group [tabGroupConfig]="mainConfig" [(selectedIndex)]="mainIndex">
+      <!-- Overview Tab -->
+      <catalyst-tab label="Overview">
+        <div class="overview-section">
+          <p>
+            Catalyst-stepper is a powerful Angular library for creating step-by-step navigation
+            components (wizards). It helps guide users through multi-step processes with clear
+            visual progress indicators and customizable layouts.
+          </p>
+          <p>
+            The stepper supports both horizontal and vertical orientations, custom icons, disabled
+            steps, and flexible header layouts for optimal user experience.
+          </p>
+
+          <div class="feature-section">
+            <h3>Why Catalyst Stepper?</h3>
+            <div class="divider"></div>
+            <p>Catalyst-stepper supports the following features:</p>
+            <ul>
+              <li>Lightweight and performant</li>
+              <li>Easy to integrate and use</li>
+              <li>Horizontal and Vertical orientations</li>
+              <li>Row and Column header layouts</li>
+              <li>Custom icons (SVG, emoji, images, HTML)</li>
+              <li>Disabled steps support</li>
+              <li>Built with Angular Signals</li>
+              <li>Standalone components</li>
+              <li>Full TypeScript support</li>
+            </ul>
+          </div>
+
+          <div class="feature-section">
+            <h3>How to use?</h3>
+            <div class="divider"></div>
+
+            <h4>1) For Standalone Components (Recommended)</h4>
+            <pre><code>{{ importStandaloneCode }}</code></pre>
+
+            <h4>2) For Module-based Apps (Legacy)</h4>
+            <pre><code>{{ importModuleCode }}</code></pre>
+
+            <h4>3) Define your steps</h4>
+            <pre><code>{{ defineStepsCode }}</code></pre>
+
+            <h4>4) Add to your template</h4>
+            <pre><code>{{ basicUsageCode }}</code></pre>
           </div>
         </div>
-      </app-catalyst-stepper>
-    </div>
+      </catalyst-tab>
 
-    <div class="demo-section">
-      <div class="demo-section-header">
-        <h3>Vertical Stepper</h3>
-        <div class="demo-controls">
-          <button (click)="goToVerticalPrevious()" [disabled]="verticalActiveStep() === 0">
-            Previous
-          </button>
-          <button
-            (click)="goToVerticalNext()"
-            [disabled]="verticalActiveStep() === verticalMenu().length - 1"
-          >
-            Next
-          </button>
-        </div>
-      </div>
+      <!-- Examples Tab -->
+      <catalyst-tab label="Examples">
+        <div class="examples-section">
+          <!-- Example 1: Orientation -->
+          <div class="example-block">
+            <h3>Example 1: Horizontal vs Vertical Orientation + Mobile View</h3>
+            <p>Toggle between horizontal and vertical stepper layouts, and preview mobile view:</p>
 
-      <app-catalyst-stepper
-        [itemMenu]="verticalMenu()"
-        [options]="{
-          orientation: 'vertical',
-          header: 'row',
-        }"
-        [(activeStep)]="verticalActiveStep"
-        (onStepChange)="onVerticalStepChange($event)"
-      >
-        @for (menu of verticalMenu(); track $index) {
-          <app-catalyst-step-body [value]="$index">
-            <div class="step-content">
-              <h4>{{ menu.label }}</h4>
-              <p>{{ menu.description }}</p>
-              <p>This is the content for step {{ $index + 1 }}</p>
+            <div class="example-demo">
+              <div class="demo-area">
+                <button class="demo-button" (click)="toggleOrientation()">
+                  Switch to {{ orientation() === 'horizontal' ? 'Vertical' : 'Horizontal' }}
+                </button>
+                <button class="demo-button" (click)="toggleMobileView()">
+                  {{ mobileView() ? 'Desktop View' : 'Mobile View' }}
+                </button>
+                <div class="divider"></div>
+                <div [class.mobile-viewport]="mobileView()">
+                  <app-catalyst-stepper
+                    [itemMenu]="exampleSteps()"
+                    [options]="{ orientation: orientation(), header: 'row' }"
+                    [(activeStep)]="ex1Step"
+                  >
+                    @for (step of exampleSteps(); track $index) {
+                      <app-catalyst-step-body [value]="$index">
+                        <div class="step-content">
+                          <h4>{{ step.label }}</h4>
+                          <p>{{ step.description }}</p>
+                        </div>
+                      </app-catalyst-step-body>
+                    }
+                    <div stepFooter>
+                      <div class="step-controls">
+                        <button (click)="ex1Prev()" [disabled]="ex1Step() === 0">Previous</button>
+                        <button
+                          (click)="ex1Next()"
+                          [disabled]="ex1Step() === exampleSteps().length - 1"
+                        >
+                          Next
+                        </button>
+                      </div>
+                    </div>
+                  </app-catalyst-stepper>
+                </div>
+              </div>
+
+              <div class="code-area">
+                <catalyst-tab-group>
+                  <catalyst-tab label="component.ts">
+                    <pre><code>{{ orientationTsCode }}</code></pre>
+                  </catalyst-tab>
+                  <catalyst-tab label="component.html">
+                    <pre><code>{{ orientationHtmlCode }}</code></pre>
+                  </catalyst-tab>
+                </catalyst-tab-group>
+              </div>
             </div>
-          </app-catalyst-step-body>
-        }
-      </app-catalyst-stepper>
-    </div>
+          </div>
 
-    <div class="demo-info">
-      <p>Horizontal Current Step: {{ horizontalActiveStep() + 1 }}</p>
-      <p>Vertical Current Step: {{ verticalActiveStep() + 1 }}</p>
-      <p>Total Steps: {{ horizontalMenu().length }}</p>
-    </div>
+          <!-- Example 2: Header Layout -->
+          <div class="example-block">
+            <h3>Example 2: Header Layout (Row vs Column)</h3>
+            <p>Control how step headers are displayed:</p>
+
+            <div class="example-demo">
+              <div class="demo-area">
+                <div class="index-controls">
+                  <button class="demo-button" (click)="headerLayout.set('row')">Row Layout</button>
+                  <button class="demo-button" (click)="headerLayout.set('column')">
+                    Column Layout
+                  </button>
+                  <p><strong>Current:</strong> {{ headerLayout() }}</p>
+                </div>
+                <div class="divider"></div>
+                <app-catalyst-stepper
+                  [itemMenu]="exampleSteps()"
+                  [options]="{ orientation: 'horizontal', header: headerLayout() }"
+                  [(activeStep)]="ex2Step"
+                >
+                  @for (step of exampleSteps(); track $index) {
+                    <app-catalyst-step-body [value]="$index">
+                      <div class="step-content">
+                        <h4>{{ step.label }}</h4>
+                        <p>{{ step.description }}</p>
+                      </div>
+                    </app-catalyst-step-body>
+                  }
+                </app-catalyst-stepper>
+              </div>
+
+              <div class="code-area">
+                <catalyst-tab-group>
+                  <catalyst-tab label="component.ts">
+                    <pre><code>{{ headerTsCode }}</code></pre>
+                  </catalyst-tab>
+                  <catalyst-tab label="component.html">
+                    <pre><code>{{ headerHtmlCode }}</code></pre>
+                  </catalyst-tab>
+                </catalyst-tab-group>
+              </div>
+            </div>
+          </div>
+
+          <!-- Example 3: Custom Icons -->
+          <div class="example-block">
+            <h3>Example 3: Custom Icons (SVG, Emoji, Images)</h3>
+            <p>Use different icon types for step indicators:</p>
+
+            <div class="example-demo full-width">
+              <div class="demo-area">
+                <app-catalyst-stepper
+                  [itemMenu]="iconSteps()"
+                  [options]="{ orientation: 'horizontal', header: 'column' }"
+                  [(activeStep)]="ex3Step"
+                >
+                  @for (step of iconSteps(); track $index) {
+                    <app-catalyst-step-body [value]="$index">
+                      <div class="step-content">
+                        <h4>{{ step.label }}</h4>
+                        <p>{{ step.description }}</p>
+                        <p>
+                          This step uses: <strong>{{ getIconType($index) }}</strong>
+                        </p>
+                      </div>
+                    </app-catalyst-step-body>
+                  }
+                  <div stepFooter>
+                    <div class="step-controls">
+                      <button (click)="ex3Prev()" [disabled]="ex3Step() === 0">Previous</button>
+                      <button (click)="ex3Next()" [disabled]="ex3Step() === iconSteps().length - 1">
+                        Next
+                      </button>
+                    </div>
+                  </div>
+                </app-catalyst-stepper>
+              </div>
+            </div>
+          </div>
+        </div>
+      </catalyst-tab>
+
+      <!-- API Reference Tab -->
+      <catalyst-tab label="API Reference">
+        <div class="api-section">
+          <h3>CatalystStepper API</h3>
+          <div class="divider"></div>
+
+          <h4>Inputs</h4>
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>itemMenu</code></td>
+                <td><code>StepperMenu[]</code></td>
+                <td>-</td>
+                <td>
+                  ✅ Required. Array of step configurations (label, description, icon, disabled)
+                </td>
+              </tr>
+              <tr>
+                <td><code>options</code></td>
+                <td><code>IStepperOptions</code></td>
+                <td>
+                  <code>{{ '{' }} orientation: 'vertical', header: 'column' {{ '}' }}</code>
+                </td>
+                <td>Configuration for stepper layout and appearance</td>
+              </tr>
+              <tr>
+                <td><code>activeStep</code></td>
+                <td><code>number</code></td>
+                <td><code>0</code></td>
+                <td>Index of the currently active step (supports two-way binding)</td>
+              </tr>
+              <tr>
+                <td><code>height</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td>Optional custom height for the stepper container</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4 class="mt-4">Outputs</h4>
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>activeStepChange</code></td>
+                <td><code>number</code></td>
+                <td>
+                  Emitted when active step changes. Auto-created by <code>model()</code> signal.
+                </td>
+                <td><code>[(activeStep)]="step"</code></td>
+              </tr>
+              <tr>
+                <td><code>onStepChange</code></td>
+                <td><code>EventEmitter&lt;number&gt;</code></td>
+                <td>Emitted when step changes. Provides the new step index.</td>
+                <td><code>(onStepChange)="handleChange($event)"</code></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4 class="mt-4">Interfaces</h4>
+          <pre><code>{{ interfacesCode }}</code></pre>
+
+          <h3 class="mt-5">CatalystStepBody API</h3>
+          <div class="divider"></div>
+
+          <h4>Inputs</h4>
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Required</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>value</code></td>
+                <td><code>number</code></td>
+                <td>✅ Yes</td>
+                <td>Zero-based index matching the step position</td>
+              </tr>
+              <tr>
+                <td><code>height</code></td>
+                <td><code>string</code></td>
+                <td>No</td>
+                <td>Optional custom height for this step's content</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4 class="mt-4">Usage Notes</h4>
+          <div class="usage-notes">
+            <p>
+              <strong>Step Footer:</strong> Use the <code>stepFooter</code> directive to add
+              navigation controls or buttons at the bottom of the stepper.
+            </p>
+            <p>
+              <strong>Icon Types:</strong> The <code>icon</code> property in StepperMenu accepts:
+            </p>
+            <ul>
+              <li>SVG strings - Full SVG markup</li>
+              <li>Emoji - Any emoji character</li>
+              <li>Image URLs - Path to image files</li>
+              <li>HTML - Custom HTML for the icon</li>
+            </ul>
+            <p>
+              <strong>Two-way Binding:</strong> Use <code>[(activeStep)]="myStep"</code> for
+              automatic synchronization between component and template.
+            </p>
+            <p>
+              <strong>Disabled Steps:</strong> Set <code>disabled: true</code> in StepperMenu to
+              prevent user interaction with specific steps.
+            </p>
+          </div>
+        </div>
+      </catalyst-tab>
+    </catalyst-tab-group>
   </div>
 </div>
