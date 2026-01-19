@@ -98,11 +98,31 @@
   font-size: 0.875rem;
   color: #666;
 }
-.demo-stepper-vertical-header {
+.demo-section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1.5rem;
+
   h3 {
     margin: 0;
+  }
+}
+
+.demo-option-controls {
+  display: flex;
+  gap: 1rem;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #333;
+    cursor: pointer;
+
+    input[type='radio'] {
+      cursor: pointer;
+    }
   }
 }

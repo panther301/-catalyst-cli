@@ -1,7 +1,104 @@
+@use 'sass:map';
+
+// -----------------------------------------------------------------------------
+// Component Configuration
+// -----------------------------------------------------------------------------
+$config: (
+  colors: (
+    line: rgba(0, 0, 0, 0.2),
+    text-default: #8c8c8c,
+    text-primary: #1f1f1f,
+  ),
+  transition: (
+    smooth: background-size 0.5s ease,
+  ),
+  breakpoints: (
+    mobile: 768px,
+  ),
+);
+
+// -----------------------------------------------------------------------------
+// Mixins & Functions
+// -----------------------------------------------------------------------------
+@function get-color($key) {
+  @return map.get(map.get($config, colors), $key);
+}
+
+@mixin mobile {
+  @media (max-width: map.get(map.get($config, breakpoints), mobile)) {
+    @content;
+  }
+}
+
+@mixin step-line($direction: vertical) {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  background-color: get-color(line);
+  background-repeat: no-repeat;
+  transition: map.get(map.get($config, transition), smooth);
+  pointer-events: none;
+
+  @if $direction == vertical {
+    left: 0;
+    top: calc(var(--circle-size) + var(--spacing));
+    bottom: var(--spacing);
+    width: 2px;
+    transform: translateX(calc(var(--circle-size) / 2));
+    background-image: linear-gradient(
+      to bottom,
+      var(--completed-stepper-color),
+      var(--completed-stepper-color)
+    );
+    background-size: 100% 0%;
+    background-position: top;
+  } @else {
+    height: 2px;
+    width: calc(100% - var(--circle-size));
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    background-image: linear-gradient(
+      to right,
+      var(--completed-stepper-color),
+      var(--completed-stepper-color)
+    );
+    background-size: 0% 100%;
+
+    // Desktop positioning
+    left: calc(var(--circle-size) + var(--spacing));
+
+    // Mobile positioning
+    @include mobile {
+      left: calc(50% + var(--circle-size) - var(--spacing) - 0.5rem);
+    }
+  }
+}
+
+// -----------------------------------------------------------------------------
+// Shared Placeholders
+// -----------------------------------------------------------------------------
+%circle-base {
+  flex: 0 0 var(--circle-size);
+  height: var(--circle-size);
+  width: var(--circle-size);
+  border-radius: 50%;
+  color: get-color(text-default);
+  border: 2px solid get-color(line);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+// -----------------------------------------------------------------------------
+// Main Component
+// -----------------------------------------------------------------------------
 .c-stepper {
   width: 100%;
   counter-reset: step;
 
+  // Variant: Vertical
   &--vertical {
     display: flex;
     flex-direction: column;
@@ -9,44 +106,28 @@
     .c-stepper__item {
       padding-bottom: 4rem;
 
-      &:not(:last-child) {
-        &:after {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: calc(var(--circle-size) + var(--spacing));
-          bottom: var(--spacing);
-          z-index: 0;
-          transform: translateX(calc(var(--circle-size) / 2));
-          width: 2px;
-          background-color: rgba(0, 0, 0, 0.1);
-          background-image: linear-gradient(
-            to bottom,
-            var(--completed-stepper-color),
-            var(--completed-stepper-color)
-          );
-          background-size: 100% 0%;
-          background-repeat: no-repeat;
-          background-position: top;
-          transition: background-size 0.5s ease;
-        }
+      &:not(:last-child):after {
+        @include step-line(vertical);
+      }
 
-        // Show progress when completed
-        &.completed::after {
-          background-size: 100% 100%;
-        }
+      &:not(:last-child).completed:after {
+        background-size: 100% 100%;
       }
     }
   }
 
+  // Variant: Horizontal
   &--horizontal {
     display: flex;
-    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     margin: 0;
     padding: 0;
-    justify-content: space-between;
     overflow: hidden;
+
+    &.c-stepper--column {
+      align-items: start !important;
+    }
 
     .c-stepper__item {
       position: relative;
@@ -55,79 +136,62 @@
       align-items: center;
       gap: 1rem;
       padding: 0.5rem;
-
-      // Mobile view: center justify
-      @media (max-width: 768px) {
-        justify-content: center;
-      }
-
-      // Horizontal separator using ::after pseudo-element
-      &.has-separator::after {
-        content: '';
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: calc(100% - var(--circle-size));
-        height: 2px;
-        background-color: rgba(0, 0, 0, 0.1);
-        background-image: linear-gradient(
-          to right,
-          var(--completed-stepper-color),
-          var(--completed-stepper-color)
-        );
-        background-size: 0% 100%;
-        background-repeat: no-repeat;
-        z-index: 0;
-        pointer-events: none;
-        transition: background-size 0.5s ease;
-
-        // Normal (desktop) view
-        left: calc(var(--circle-size) + var(--spacing));
-
-        // Mobile view
-        @media (max-width: 768px) {
-          left: calc(50% + var(--circle-size) - var(--spacing) - 0.5rem);
+      &--column {
+        flex: 1;
+        flex-direction: column;
+        &:after {
+          top: calc(var(--circle-size) / 2 + var(--spacing)) !important;
+          left: calc(50% + var(--spacing) + 0.5rem) !important;
         }
       }
 
-      // Show progress when completed
+      @include mobile {
+        justify-content: center;
+      }
+
+      &.has-separator::after {
+        @include step-line(horizontal);
+      }
+
       &.has-separator.completed::after {
         background-size: 100% 100%;
       }
     }
   }
-}
-.c-stepper__content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: clamp(0.85rem, 2vmax, 1rem);
-  .c-stepper__title {
-    font-weight: 400;
-    color: var(--colorText, #1f1f1f);
-    font-size: 1rem;
-  }
 
-  .c-stepper__desc {
-    color: var(--colorTextDescription, #8c8c8c);
-    font-weight: 400;
-    font-size: 0.825rem;
-  }
+  // Element: Content Container
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(0.85rem, 2vmax, 1rem);
 
-  // Mobile-only content view
-  &--mobile {
-    display: none;
-    text-align: center;
-    align-items: center;
-    gap: 0.25rem;
-
-    @media (max-width: 768px) {
-      display: flex;
+    &--column {
+      align-items: center !important;
     }
 
-    // Mobile letter view for vertical orientation
-    &--mobile-letter {
+    .c-stepper__title {
+      font-weight: 400;
+      color: var(--colorText, get-color(text-primary));
+      font-size: 1rem;
+    }
+
+    .c-stepper__desc {
+      color: var(--colorTextDescription, get-color(text-default));
+      font-weight: 400;
+      font-size: 0.825rem;
+    }
+
+    &--mobile {
+      display: none;
+      text-align: center;
+      align-items: center;
+      gap: 0.25rem;
+
+      @include mobile {
+        display: flex;
+      }
+
       .c-stepper__letter {
         font-size: 2rem;
         font-weight: 600;
@@ -135,125 +199,104 @@
       }
     }
   }
-}
-.c-stepper__item {
-  position: relative;
-  display: flex;
-  gap: 1rem;
-  cursor: pointer;
-  counter-increment: step;
 
-  &.disabled {
-    cursor: not-allowed;
-  }
-
-  &:before {
-    content: counter(step);
-    flex: 0 0 var(--circle-size);
-    height: var(--circle-size);
-    border-radius: 50%;
-    color: #8c8c8c;
-    border: 2px solid rgba(0, 0, 0, 0.1);
+  // Element: Step Item
+  &__item {
+    position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    gap: 1rem;
+    cursor: pointer;
+    counter-increment: step;
 
-  &.active::before {
-    color: var(--active-stepper-color);
-    border: 2px solid var(--active-stepper-color);
-  }
+    &.disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
 
-  &.completed::before {
-    content: '\2713';
-    color: var(--completed-stepper-color);
-    border: 2px solid var(--completed-stepper-color);
-  }
-
-  // Icon mode - hide counter/checkmark completely when icon is present
-  &--has-icon {
+    // Default Counter (Number)
     &:before {
-      display: none !important;
-      content: none !important;
+      @extend %circle-base;
+      content: counter(step);
     }
 
-    // Ensure completed state doesn't show checkmark
-    &.completed::before {
-      display: none !important;
-      content: none !important;
+    // State: Active
+    &.active {
+      &::before,
+      .c-stepper__icon {
+        color: var(--active-stepper-color);
+        border-color: var(--active-stepper-color);
+      }
     }
 
-    // Ensure active state styling doesn't show counter
-    &.active::before {
-      display: none !important;
-      content: none !important;
+    // State: Completed
+    &.completed {
+      &::before {
+        content: '\2713'; // Checkmark
+      }
+      &::before,
+      .c-stepper__icon {
+        color: var(--completed-stepper-color);
+        border-color: var(--completed-stepper-color);
+      }
+    }
+
+    // Modifier: Has Icon (override default counter)
+    &--has-icon {
+      &:before,
+      &.completed:before,
+      &.active:before {
+        display: none !important;
+        content: none !important;
+      }
+    }
+  }
+
+  // Element: Icon Container
+  &__icon {
+    @extend %circle-base;
+    font-size: 1.125rem;
+    overflow: hidden;
+
+    &-img {
+      max-width: 70%;
+      max-height: 70%;
+      object-fit: contain;
+    }
+
+    svg {
+      width: 70%;
+      height: 70%;
+      display: block;
+    }
+
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
     }
   }
 }
 
-.c-stepper__icon {
-  flex: 0 0 var(--circle-size);
-  height: var(--circle-size);
-  border-radius: 50%;
-  color: #8c8c8c;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.125rem;
-  overflow: hidden;
-
-  .c-stepper__item.active & {
-    color: var(--active-stepper-color);
-    border: 2px solid var(--active-stepper-color);
-  }
-
-  .c-stepper__item.completed & {
-    color: var(--completed-stepper-color);
-    border: 2px solid var(--completed-stepper-color);
-  }
-
-  // Image icon styles
-  &-img {
-    max-width: 70%;
-    max-height: 70%;
-    object-fit: contain;
-  }
-
-  // SVG and HTML content styles
-  svg {
-    width: 70%;
-    height: 70%;
-    display: block;
-  }
-
-  span {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-  }
-}
-
+// -----------------------------------------------------------------------------
+// Utility Classes
+// -----------------------------------------------------------------------------
 .catalyst-flex {
   display: flex;
 }
-
 .catalyst-flex-row {
   flex-direction: row;
 }
-
 .catalyst-flex-col {
   flex-direction: column;
 }
-
 .catalyst-gap-y-4 {
   gap: 1rem;
 }
 
 .catalyst-line {
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: get-color(line);
 
   &--vertical {
     width: 1px;
@@ -265,9 +308,8 @@
   }
 }
 
-// Mobile display none utility class
 .catalyst-hide-mobile {
-  @media (max-width: 768px) {
+  @include mobile {
     display: none !important;
   }
 }

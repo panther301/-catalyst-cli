@@ -5,18 +5,20 @@ import {
   // Alternative: You can also import CatalystStepperModule for module-based usage
   // CatalystStepperModule,
 } from '@catalyst-cli/catalyst-stepper';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-stepper-demo',
   standalone: true,
-  imports: [CatalystStepperModule, CommonModule],
+  imports: [CatalystStepperModule, CommonModule, FormsModule],
   templateUrl: './stepper-demo.html',
   styleUrl: './stepper-demo.scss',
 })
 export class StepperDemo {
   horizontalActiveStep = signal<number>(0);
   verticalActiveStep = signal<number>(0);
+  headerAlignment = signal<'row' | 'column'>('row');
 
   horizontalMenu = signal<StepperMenu[]>([
     {

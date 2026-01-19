@@ -19,24 +19,48 @@
 
   <div class="demo-content">
     <div class="demo-section">
-      <h3>Horizontal Stepper</h3>
+      <div class="demo-section-header">
+        <h3>Horizontal Stepper</h3>
+        <div class="demo-option-controls">
+          <label>
+            <input
+              type="radio"
+              name="headerAlignment"
+              value="row"
+              [ngModel]="headerAlignment()"
+              (ngModelChange)="headerAlignment.set($event)"
+            />
+            Row
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="headerAlignment"
+              value="column"
+              [ngModel]="headerAlignment()"
+              (ngModelChange)="headerAlignment.set($event)"
+            />
+            Column
+          </label>
+        </div>
+      </div>
       <app-catalyst-stepper
         [itemMenu]="horizontalMenu()"
         [options]="{
           orientation: 'horizontal',
-          header: 'column',
+          header: headerAlignment(),
         }"
         [(activeStep)]="horizontalActiveStep"
         (onStepChange)="onHorizontalStepChange($event)"
       >
         @for (menu of horizontalMenu(); track $index) {
-        <app-catalyst-step-body [value]="$index">
-          <div class="step-content">
-            <h4>{{ menu.label }}</h4>
-            <p>{{ menu.description }}</p>
-            <p>This is the content for step {{ $index + 1 }}</p>
-          </div>
-        </app-catalyst-step-body>
+          <app-catalyst-step-body [value]="$index">
+            <div class="step-content">
+              <h4>{{ menu.label }}</h4>
+              <p>{{ menu.description }}</p>
+              <p>This is the content for step {{ $index + 1 }}</p>
+            </div>
+          </app-catalyst-step-body>
         }
         <div stepFooter>
           <div class="demo-controls">
@@ -55,7 +79,7 @@
     </div>
 
     <div class="demo-section">
-      <div class="demo-stepper-vertical-header">
+      <div class="demo-section-header">
         <h3>Vertical Stepper</h3>
         <div class="demo-controls">
           <button (click)="goToVerticalPrevious()" [disabled]="verticalActiveStep() === 0">
@@ -80,13 +104,13 @@
         (onStepChange)="onVerticalStepChange($event)"
       >
         @for (menu of verticalMenu(); track $index) {
-        <app-catalyst-step-body [value]="$index">
-          <div class="step-content">
-            <h4>{{ menu.label }}</h4>
-            <p>{{ menu.description }}</p>
-            <p>This is the content for step {{ $index + 1 }}</p>
-          </div>
-        </app-catalyst-step-body>
+          <app-catalyst-step-body [value]="$index">
+            <div class="step-content">
+              <h4>{{ menu.label }}</h4>
+              <p>{{ menu.description }}</p>
+              <p>This is the content for step {{ $index + 1 }}</p>
+            </div>
+          </app-catalyst-step-body>
         }
       </app-catalyst-stepper>
     </div>
