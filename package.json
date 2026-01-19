@@ -1,6 +1,8 @@
 {
   "name": "catalyst-cli",
-  "version": "0.0.0",
+  "version": "0.0.1",
+  "author": "Anindya Giri",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,7 +11,10 @@
     "test": "ng test",
     "build:lib:dynamic-widget": "ng build dynamic-widget",
     "build:lib:stepper": "ng build stepper",
-    "build:lib:tab": "ng build catalyst-tab"
+    "build:lib:tab": "ng build catalyst-tab",
+    "build:demo": "ng build --base-href /-catalyst-cli/",
+    "predeploy": "npm run build:demo",
+    "deploy": "npx angular-cli-ghpages --dir=dist/catalyst-cli/browser"
   },
   "prettier": {
     "printWidth": 100,
