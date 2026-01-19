@@ -1,16 +1,10 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  EventEmitter,
-  HostListener,
-  Output,
-  input,
-} from '@angular/core';
+import { Component, EventEmitter, HostListener, Output, input } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
 import { IWidget } from './widget.model';
 
 @Component({
-  selector: 'ngx-widget',
+  selector: 'catalyst-widget',
   standalone: true,
   imports: [CommonModule, NgComponentOutlet],
   templateUrl: './widget.component.html',
@@ -66,7 +60,7 @@ export class WidgetComponent {
       | 'resize-top-right'
       | 'resize-bottom-left'
       | 'resize-bottom-right',
-    widget: IWidget
+    widget: IWidget,
   ) {
     event.preventDefault();
     this.isDragging = true;
@@ -86,10 +80,8 @@ export class WidgetComponent {
     const stepX = 100 / this.maxGridSize; // Each step is a percentage
     const stepY = 100 / this.maxGridSize; // Each step is a percentage
 
-    const deltaX =
-      ((event.clientX - this.initialMouseX) / window.innerWidth) * 100;
-    const deltaY =
-      ((event.clientY - this.initialMouseY) / window.innerHeight) * 100;
+    const deltaX = ((event.clientX - this.initialMouseX) / window.innerWidth) * 100;
+    const deltaY = ((event.clientY - this.initialMouseY) / window.innerHeight) * 100;
 
     switch (this.dragType) {
       case 'move':
@@ -135,12 +127,7 @@ export class WidgetComponent {
     this.activeWidget = null;
   }
 
-  private moveWidget(
-    deltaX: number,
-    deltaY: number,
-    stepX: number,
-    stepY: number
-  ) {
+  private moveWidget(deltaX: number, deltaY: number, stepX: number, stepY: number) {
     if (!this.activeWidget) return;
 
     this.activeWidget.left = Math.max(0, this.initialLeft + deltaX);

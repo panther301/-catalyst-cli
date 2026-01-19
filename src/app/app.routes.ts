@@ -6,11 +6,11 @@ import { TabDemo } from './demos/tab-demo/tab-demo';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/dynamic-widget',
+    redirectTo: '/catalyst-dynamic-widget',
     pathMatch: 'full',
   },
   {
-    path: 'dynamic-widget',
+    path: 'catalyst-dynamic-widget',
     component: DynamicWidgetDemo,
   },
   {

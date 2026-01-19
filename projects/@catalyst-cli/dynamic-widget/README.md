@@ -25,10 +25,10 @@ The active edit mode can be toggled using the `isEdit` input. Widgets can be mov
 ### First import NgxWidgetModule in the root module (AppModule):
 
 ```typescript
-import { NgModule } from "@angular/core";
-import { BrowserModule } from "@angular/platform-browser";
-import { NgxWidgetModule } from "@catalyst-cli/dynamic-widget";
-import { AppComponent } from "./app.component";
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgxWidgetModule } from '@catalyst-cli/dynamic-widget';
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -41,15 +41,15 @@ export class AppModule {}
 ### For Standalone Components:
 
 ```typescript
-import { Component, signal } from "@angular/core";
-import { WidgetComponent, WidgetService } from "@catalyst-cli/dynamic-widget";
-import { IWidget } from "@catalyst-cli/dynamic-widget";
+import { Component, signal } from '@angular/core';
+import { WidgetComponent, WidgetService } from '@catalyst-cli/dynamic-widget';
+import { IWidget } from '@catalyst-cli/dynamic-widget';
 
 @Component({
-  selector: "app-root",
+  selector: 'app-root',
   standalone: true,
   imports: [WidgetComponent],
-  templateUrl: "./app.component.html",
+  templateUrl: './app.component.html',
 })
 export class AppComponent {
   widgets = signal<IWidget[]>([]);
@@ -68,8 +68,8 @@ export class AppComponent {
         height: 40,
         component: YourComponent,
         metadata: {
-          title: "My Widget",
-          description: "Widget description",
+          title: 'My Widget',
+          description: 'Widget description',
         },
       }),
     ];
@@ -111,7 +111,12 @@ export class AppComponent {
   </header>
 
   <main class="dashboard-content">
-    <ngx-widget [widgets]="widgets()" [isEdit]="isEditMode()" (widgetUpdated)="onWidgetUpdated($event)" (widgetDeleted)="onWidgetDeleted($event)"></ngx-widget>
+    <catalyst-widget
+      [widgets]="widgets()"
+      [isEdit]="isEditMode()"
+      (widgetUpdated)="onWidgetUpdated($event)"
+      (widgetDeleted)="onWidgetDeleted($event)"
+    ></catalyst-widget>
   </main>
 </div>
 ```
@@ -119,10 +124,10 @@ export class AppComponent {
 ### Create a Widget Component:
 
 ```typescript
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
-  selector: "app-my-widget",
+  selector: 'app-my-widget',
   standalone: true,
   template: `
     <div>
@@ -214,9 +219,9 @@ const widget = this.widgetService.createWidget(1, {
   height: 40,
   component: MyComponent,
   metadata: {
-    title: "Sales Dashboard",
-    description: "Monthly sales overview",
-    category: "analytics",
+    title: 'Sales Dashboard',
+    description: 'Monthly sales overview',
+    category: 'analytics',
     createdAt: new Date().toISOString(),
   },
 });

@@ -239,12 +239,12 @@ constructor(private widgetService: WidgetService) {
   ]);
 }`;
 
-  templateCode = `<ngx-widget
+  templateCode = `<catalyst-widget
   [widgets]="widgets()"
   [isEdit]="isEditMode"
   (widgetUpdated)="onWidgetUpdated($event)"
   (widgetDeleted)="onWidgetDeleted($event)">
-</ngx-widget>`;
+</catalyst-widget>`;
 
   // Code snippets for Examples
   dashboardTsCode = `isEditMode = signal(false);
@@ -284,12 +284,12 @@ onWidgetDeleted(id: number) {
   {{ isEditMode() ? 'Exit Edit' : 'Edit' }}
 </button>
 
-<ngx-widget
+<catalyst-widget
   [widgets]="widgets()"
   [isEdit]="isEditMode()"
   (widgetUpdated)="onWidgetUpdated($event)"
   (widgetDeleted)="onWidgetDeleted($event)">
-</ngx-widget>`;
+</catalyst-widget>`;
 
   constraintsCode = `// Widget with size constraints
 this.widgetService.createWidget(1, {
