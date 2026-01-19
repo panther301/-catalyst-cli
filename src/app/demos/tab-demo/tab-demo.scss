@@ -4,69 +4,370 @@
   display: flex;
   flex-direction: column;
   background: #f5f5f5;
+  overflow-x: hidden; // Prevent horizontal scroll
+
   .demo-header {
-    padding: 1rem 2rem;
-    background: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
     .demo-header-content {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 1rem;
+
+      h2 {
+        margin: 0;
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: white;
+      }
     }
 
     .demo-logo {
-      display: none; // Hidden by default (desktop)
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
+    }
+  }
 
-      @media (max-width: 767px) {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+  .demo-content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden; // Prevent horizontal scroll
+    padding: 2rem;
+    max-height: calc(100vh - 90px);
+    background: white;
+  }
+}
+
+// Overview Section
+.overview-section {
+  p {
+    line-height: 1.6;
+    color: #555;
+  }
+
+  .feature-section {
+    margin-top: 2.5rem;
+
+    h3 {
+      color: #333;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    h4 {
+      color: #555;
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .divider {
+      height: 2px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+
+      li {
+        padding: 0.5rem 0;
+        padding-left: 1.5rem;
+        position: relative;
+
+        &::before {
+          content: '✓';
+          position: absolute;
+          left: 0;
+          color: #667eea;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+// Examples Section
+.examples-section {
+  .example-block {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e0e0e0;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    h3 {
+      color: #333;
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+
+    .example-demo {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+
+      @media (max-width: 992px) {
+        grid-template-columns: 1fr;
+      }
+
+      &.full-width {
+        grid-template-columns: 1fr;
+        max-width: 100%;
+      }
+
+      .demo-area {
+        padding: 1.5rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        border: 1px solid #e0e0e0;
+        // Remove overflow-x to let tab group handle its own scrolling
+        min-width: 0; // Allow flex/grid child to shrink below content size
+
+        .demo-button {
+          padding: 0.6rem 1.5rem;
+          background: linear-gradient(135deg, #667eea, #764ba2);
+          color: white;
+          border: none;
+          border-radius: 6px;
+          font-size: 0.95rem;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          margin-bottom: 1rem;
+
+          &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4);
+          }
+
+          &:active {
+            transform: translateY(0);
+          }
+        }
+
+        .index-controls {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.75rem;
+          align-items: center;
+          margin-bottom: 1rem;
+
+          p {
+            margin: 0;
+            padding: 0.6rem 1rem;
+            background: white;
+            border-radius: 6px;
+            font-weight: 500;
+          }
+        }
+
+        .divider {
+          height: 2px;
+          background: #e0e0e0;
+          margin: 1rem 0;
+        }
+      }
+
+      .code-area {
+        background: #1e1e1e;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #333;
+      }
+    }
+  }
+}
+
+// Code Blocks
+pre {
+  background: #1e1e1e;
+  color: #d4d4d4;
+  padding: 1.25rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1rem 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+
+  code {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    white-space: pre;
+  }
+}
+
+// API Reference Section
+.api-section {
+  h3 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  h4 {
+    color: #555;
+    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .divider {
+    height: 2px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    margin-bottom: 1.5rem;
+  }
+
+  .api-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    thead {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+
+      th {
+        padding: 1rem;
+        text-align: left;
+        font-weight: 600;
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom: 1px solid #e0e0e0;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &:nth-child(even) {
+          background: #f8f9fa;
+        }
+
+        td {
+          padding: 0.875rem 1rem;
+
+          code {
+            background: #f0f0f0;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            color: #c7254e;
+          }
+        }
       }
     }
   }
 
-  .demo-header h2 {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #333;
+  .mt-4 {
+    margin-top: 2rem;
+  }
+
+  .mt-5 {
+    margin-top: 3rem;
+  }
+
+  .usage-notes {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    margin-top: 1rem;
+
+    p {
+      margin: 0.75rem 0;
+      line-height: 1.6;
+
+      strong {
+        color: #333;
+      }
+    }
+
+    ul {
+      margin: 0.5rem 0;
+      padding-left: 1.5rem;
+
+      li {
+        margin: 0.5rem 0;
+        line-height: 1.6;
+
+        code {
+          background: white;
+          padding: 0.2rem 0.5rem;
+          border-radius: 4px;
+          font-size: 0.85rem;
+          color: #c7254e;
+        }
+      }
+    }
+
+    code {
+      background: white;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      color: #c7254e;
+    }
   }
 }
-.demo-content {
-  flex: 1;
-  overflow-y: auto;
+
+// Custom tab styles for Example 3
+::ng-deep .custom-tab-style {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 0.5rem;
+  border-radius: 8px 8px 0 0;
+
+  ul {
+    gap: 0.5rem;
+
+    li {
+      color: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 6px;
+      padding: 0.6rem 1.2rem;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+      }
+
+      &.active {
+        background: white;
+        color: #667eea;
+        font-weight: 600;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+}
+
+::ng-deep .custom-content-style {
+  background: #f8f9fa;
   padding: 2rem;
-  max-height: calc(100vh - 70px);
-}
-.demo-section {
-  margin-bottom: 40px;
-  border: 1px solid #ddd;
-  padding: 20px;
-  border-radius: 8px;
-  background: #f9f9f9;
-
-  h3 {
-    margin-top: 0;
-  }
-
-  .demo-controls {
-    display: flex;
-    gap: 1rem;
-  }
-
-  .demo-controls button {
-    padding: 0.5rem 1.5rem;
-    background: #4f46e5;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
+  border-radius: 0 0 8px 8px;
+  min-height: 150px;
+  border: 2px solid #667eea;
+  border-top: none;
 }
 
 :host {

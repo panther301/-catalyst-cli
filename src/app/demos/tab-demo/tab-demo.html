@@ -3,10 +3,10 @@
     <div class="demo-header-content">
       <div class="demo-logo">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <rect width="32" height="32" rx="8" fill="url(#gradient-stepper)" />
+          <rect width="32" height="32" rx="8" fill="url(#gradient-tab)" />
           <path d="M16 8L24 16L16 24L8 16L16 8Z" fill="white" opacity="0.9" />
           <defs>
-            <linearGradient id="gradient-stepper" x1="0" y1="0" x2="32" y2="32">
+            <linearGradient id="gradient-tab" x1="0" y1="0" x2="32" y2="32">
               <stop offset="0%" stop-color="#667eea" />
               <stop offset="100%" stop-color="#764ba2" />
             </linearGradient>
@@ -18,40 +18,382 @@
   </div>
 
   <div class="demo-content">
-    <section class="demo-section">
-      <div class="demo-controls">
-        <h3>Horizontal Tabs</h3>
-        <button (click)="addTab()">Add Tab</button>
-      </div>
+    <catalyst-tab-group [tabGroupConfig]="mainConfig" [(selectedIndex)]="mainIndex">
+      <!-- Overview Tab -->
+      <catalyst-tab label="Overview">
+        <div class="overview-section">
+          <p>
+            Catalyst-tab-group is a fully independent Angular library. catalyst-tab-group organizes
+            all tab-panel data into separate views where only one view can be visible at a time.
+            Each tab's label is shown in the tab header. You can fully customize it using CSS
+            classes.
+          </p>
+          <p>
+            The active tab may be set using the selectedIndex input or when the user selects one of
+            the tab labels in the header. It accepts numbers only.
+          </p>
 
-      <catalyst-tab-group [tabGroupConfig]="horizontalConfig" [(selectedIndex)]="horizontalIndex">
-        @for (tab of tabs(); track $index) {
-          <catalyst-tab [label]="tab.title">
-            <p>{{ tab.content }}</p>
-            <p>Index: {{ $index }}</p>
-          </catalyst-tab>
-        }
-      </catalyst-tab-group>
-      <p>Selected Index: {{ horizontalIndex() }}</p>
-    </section>
+          <div class="feature-section">
+            <h3>Why Catalyst Tab Group?</h3>
+            <div class="divider"></div>
+            <p>Catalyst-tab-group supports the following features:</p>
+            <ul>
+              <li>Lightweight for your project</li>
+              <li>Easy to use</li>
+              <li>Horizontal and Vertical tab layouts supported</li>
+              <li>Pass different classes for tabs and tab-panels to customize</li>
+              <li>Built with Angular Signals for optimal performance</li>
+              <li>Standalone components - no module imports needed</li>
+              <li>OnPush change detection</li>
+              <li>Full accessibility support (ARIA attributes, keyboard navigation)</li>
+            </ul>
+          </div>
 
-    <section class="demo-section">
-      <h3>Vertical Tabs</h3>
-      <catalyst-tab-group [tabGroupConfig]="verticalConfig" [(selectedIndex)]="verticalIndex">
-        <catalyst-tab label="Account">
-          <h4>Account Settings</h4>
-          <p>Manage your account settings here.</p>
-        </catalyst-tab>
-        <catalyst-tab label="Profile">
-          <h4>Profile Information</h4>
-          <p>Update your profile details.</p>
-        </catalyst-tab>
-        <catalyst-tab label="Security">
-          <h4>Security</h4>
-          <p>Password and security options.</p>
-        </catalyst-tab>
-      </catalyst-tab-group>
-      <p>Selected Index: {{ verticalIndex() }}</p>
-    </section>
+          <div class="feature-section">
+            <h3>How to use?</h3>
+            <div class="divider"></div>
+
+            <h4>1) For Standalone Components (Recommended)</h4>
+            <pre><code>{{ importStandaloneCode }}</code></pre>
+
+            <h4>2) For Module-based Apps (Legacy)</h4>
+            <pre><code>{{ importModuleCode }}</code></pre>
+
+            <h4>3) Add to your template (app.component.html)</h4>
+            <pre><code>{{ basicUsageCode }}</code></pre>
+          </div>
+
+          <div class="feature-section">
+            <h3>Configuration Options</h3>
+            <div class="divider"></div>
+            <p>Configure your tab-group in your component TypeScript file:</p>
+            <pre><code>{{ configCode }}</code></pre>
+
+            <p>Use it in your template:</p>
+            <pre><code>{{ configUsageCode }}</code></pre>
+          </div>
+        </div>
+      </catalyst-tab>
+
+      <!-- Examples Tab -->
+      <catalyst-tab label="Examples">
+        <div class="examples-section">
+          <!-- Example 1: Horizontal/Vertical Toggle -->
+          <div class="example-block">
+            <h3>Example 1: Toggle Horizontal/Vertical Orientation</h3>
+            <p>You can dynamically switch between horizontal and vertical tab layouts:</p>
+
+            <div class="example-demo">
+              <div class="demo-area">
+                <button class="demo-button" (click)="toggleOrientation()">
+                  Switch to {{ config1().position === 'horizontal' ? 'Vertical' : 'Horizontal' }}
+                </button>
+                <div class="divider"></div>
+                <catalyst-tab-group [tabGroupConfig]="config1()">
+                  <catalyst-tab label="First">
+                    <p>Content for the first tab</p>
+                  </catalyst-tab>
+                  <catalyst-tab label="Second">
+                    <p>Content for the second tab</p>
+                  </catalyst-tab>
+                  <catalyst-tab label="Third">
+                    <p>Content for the third tab</p>
+                  </catalyst-tab>
+                </catalyst-tab-group>
+              </div>
+
+              <div class="code-area">
+                <catalyst-tab-group>
+                  <catalyst-tab label="component.ts">
+                    <pre><code>{{ orientationTsCode }}</code></pre>
+                  </catalyst-tab>
+                  <catalyst-tab label="component.html">
+                    <pre><code>{{ orientationHtmlCode }}</code></pre>
+                  </catalyst-tab>
+                </catalyst-tab-group>
+              </div>
+            </div>
+          </div>
+
+          <!-- Example 2: Selected Index Control -->
+          <div class="example-block">
+            <h3>Example 2: Control Selected Tab Index</h3>
+            <p>You can programmatically control which tab is selected:</p>
+
+            <div class="example-demo">
+              <div class="demo-area">
+                <div class="index-controls">
+                  <button class="demo-button" (click)="setTabIndex(0)">Tab 1</button>
+                  <button class="demo-button" (click)="setTabIndex(1)">Tab 2</button>
+                  <button class="demo-button" (click)="setTabIndex(2)">Tab 3</button>
+                  <p><strong>Current Index:</strong> {{ tabIndex() }}</p>
+                </div>
+                <div class="divider"></div>
+                <catalyst-tab-group [(selectedIndex)]="tabIndex">
+                  <catalyst-tab label="Profile">
+                    <h4>Profile Tab</h4>
+                    <p>Manage your profile information</p>
+                  </catalyst-tab>
+                  <catalyst-tab label="Settings">
+                    <h4>Settings Tab</h4>
+                    <p>Configure your preferences</p>
+                  </catalyst-tab>
+                  <catalyst-tab label="Notifications">
+                    <h4>Notifications Tab</h4>
+                    <p>View your notifications</p>
+                  </catalyst-tab>
+                </catalyst-tab-group>
+              </div>
+
+              <div class="code-area">
+                <catalyst-tab-group>
+                  <catalyst-tab label="component.ts">
+                    <pre><code>{{ indexTsCode }}</code></pre>
+                  </catalyst-tab>
+                  <catalyst-tab label="component.html">
+                    <pre><code>{{ indexHtmlCode }}</code></pre>
+                  </catalyst-tab>
+                </catalyst-tab-group>
+              </div>
+            </div>
+          </div>
+
+          <!-- Example 3: Custom Styling -->
+          <div class="example-block">
+            <h3>Example 3: Custom Styling with CSS Classes</h3>
+            <p>Apply custom styles to tabs and content areas:</p>
+
+            <div class="example-demo">
+              <div class="demo-area">
+                <catalyst-tab-group [tabGroupConfig]="customConfig">
+                  <catalyst-tab label="Dashboard">
+                    <p>Dashboard content with custom styling</p>
+                  </catalyst-tab>
+                  <catalyst-tab label="Analytics">
+                    <p>Analytics content with custom styling</p>
+                  </catalyst-tab>
+                  <catalyst-tab label="Reports">
+                    <p>Reports content with custom styling</p>
+                  </catalyst-tab>
+                </catalyst-tab-group>
+              </div>
+
+              <div class="code-area">
+                <catalyst-tab-group>
+                  <catalyst-tab label="component.ts">
+                    <pre><code>{{ customStyleTsCode }}</code></pre>
+                  </catalyst-tab>
+                  <catalyst-tab label="component.html">
+                    <pre><code>{{ customStyleHtmlCode }}</code></pre>
+                  </catalyst-tab>
+                  <catalyst-tab label="component.scss">
+                    <pre><code>{{ customStyleCssCode }}</code></pre>
+                  </catalyst-tab>
+                </catalyst-tab-group>
+              </div>
+            </div>
+          </div>
+
+          <!-- Example 4: Many Tabs with Scrolling -->
+          <div class="example-block">
+            <h3>Example 4: Many Tabs with Auto-Scrolling</h3>
+            <p>When there are many tabs, scroll buttons appear automatically:</p>
+
+            <div class="example-demo full-width">
+              <div class="demo-area">
+                <catalyst-tab-group>
+                  @for (tab of manyTabs(); track $index) {
+                    <catalyst-tab [label]="tab.label">
+                      <p>{{ tab.content }}</p>
+                    </catalyst-tab>
+                  }
+                </catalyst-tab-group>
+              </div>
+            </div>
+          </div>
+        </div>
+      </catalyst-tab>
+
+      <!-- API Reference Tab -->
+      <catalyst-tab label="API Reference">
+        <div class="api-section">
+          <h3>CatalystTabGroup API</h3>
+          <div class="divider"></div>
+
+          <h4>Inputs</h4>
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>tabGroupConfig</code></td>
+                <td><code>TabGroupConfig</code></td>
+                <td>
+                  <code>{{ '{' }} position: 'horizontal', taClass: '', coClass: '' {{ '}' }}</code>
+                </td>
+                <td>
+                  Configuration object for tab layout and styling. Controls orientation and CSS
+                  classes.
+                </td>
+              </tr>
+              <tr>
+                <td><code>selectedIndex</code></td>
+                <td><code>number</code></td>
+                <td><code>0</code></td>
+                <td>
+                  Index of the currently selected tab (zero-based). Supports two-way binding with
+                  <code>[(selectedIndex)]</code>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4 class="mt-4">Outputs</h4>
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>selectedIndexChange</code></td>
+                <td><code>number</code></td>
+                <td>
+                  Emitted when the selected tab changes (user click or programmatic). Auto-created
+                  by Angular's <code>model()</code> signal.
+                </td>
+                <td>
+                  <code>[(selectedIndex)]="index"</code> or
+                  <code>(selectedIndexChange)="onChange($event)"</code>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4 class="mt-4">Public Properties</h4>
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>tabs</code></td>
+                <td><code>Signal&lt;CatalystTabComponent[]&gt;</code></td>
+                <td>
+                  Read-only signal containing all child tab components (via
+                  <code>contentChildren</code>)
+                </td>
+              </tr>
+              <tr>
+                <td><code>isHorizontal</code></td>
+                <td><code>Signal&lt;boolean&gt;</code></td>
+                <td>Computed signal indicating if orientation is horizontal</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4 class="mt-4">TabGroupConfig Interface</h4>
+          <pre><code>{{ apiConfigCode }}</code></pre>
+
+          <h3 class="mt-5">CatalystTab API</h3>
+          <div class="divider"></div>
+
+          <h4>Inputs</h4>
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Required</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>label</code></td>
+                <td><code>string</code></td>
+                <td>✅ Yes</td>
+                <td>
+                  Text displayed in the tab header. This is an alias for the
+                  <code>title</code> input for better semantics.
+                </td>
+              </tr>
+              <tr>
+                <td><code>active</code></td>
+                <td><code>boolean</code></td>
+                <td>No</td>
+                <td>
+                  Controls whether this tab is active/visible. Managed automatically by parent, but
+                  can be used for custom control. Supports two-way binding.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4 class="mt-4">Outputs</h4>
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Example</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>activeChange</code></td>
+                <td><code>boolean</code></td>
+                <td>
+                  Emitted when the active state changes. Auto-created by Angular's
+                  <code>model()</code> signal.
+                </td>
+                <td>
+                  <code>[(active)]="isActive"</code> or
+                  <code>(activeChange)="onActiveChange($event)"</code>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4 class="mt-4">Usage Notes</h4>
+          <div class="usage-notes">
+            <p>
+              <strong>Two-way Binding:</strong> Both components use Angular's
+              <code>model()</code> signal which automatically creates two-way binding. You can use:
+            </p>
+            <ul>
+              <li><code>[(selectedIndex)]="myIndex"</code> - Two-way binding (recommended)</li>
+              <li>
+                <code>[selectedIndex]="myIndex" (selectedIndexChange)="myIndex=$event"</code> -
+                Explicit binding
+              </li>
+            </ul>
+            <p>
+              <strong>Accessibility:</strong> The component includes ARIA attributes and keyboard
+              navigation (Enter/Space keys) for accessibility.
+            </p>
+            <p>
+              <strong>Signals:</strong> All reactive properties use Angular Signals for optimal
+              performance with OnPush change detection.
+            </p>
+          </div>
+        </div>
+      </catalyst-tab>
+    </catalyst-tab-group>
   </div>
 </div>
