@@ -1,6 +1,6 @@
 {
   "name": "@catalyst-cli/dynamic-widget",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A powerful Angular library for creating draggable and resizable dynamic widgets with edit mode support",
   "keywords": [
     "angular",

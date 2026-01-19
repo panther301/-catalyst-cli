@@ -1,6 +1,18 @@
 {
   "name": "@catalyst-cli/catalyst-tab-group",
-  "version": "1.0.0",
+  "version": "1.0.4",
+  "keywords": [
+    "angular",
+    "angular21",
+    "tabs",
+    "tab-group",
+    "navigation",
+    "ui",
+    "components",
+    "standalone",
+    "signals",
+    "@catalyst-cli"
+  ],
   "peerDependencies": {
     "@angular/common": "^21.0.0",
     "@angular/core": "^21.0.0"

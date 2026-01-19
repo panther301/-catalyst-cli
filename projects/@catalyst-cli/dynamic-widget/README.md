@@ -12,7 +12,7 @@ npm install @catalyst-cli/dynamic-widget
 
 ## Demo
 
-[Click here for live demo](https://panther301.github.io/ngx-dynamic-widget/)
+[Click here for live demo](https://panther301.github.io/-catalyst-cli/catalyst-dynamic-widget)
 
 ## Description
 

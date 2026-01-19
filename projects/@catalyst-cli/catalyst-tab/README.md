@@ -1,88 +1,134 @@
-# CatalystTabGroup
+# @catalyst-cli/catalyst-tab-group
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.12.
+A powerful and flexible generic tab component for Angular applications, built with modern Angular features (Signals, Standalone Components). This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
 
-## Install CatalystTabGroup
+## Installation
 
 ```bash
-npm i catalyst-tab-group
+npm i @catalyst-cli/catalyst-tab-group
 ```
 
 ## Demo
 
-click the link for [demo](https://panther301.github.io/catalysttab.github.io/)
+[Click here for live demo](https://panther301.github.io/-catalyst-cli/tabs)
 
-## Description
+## Features
 
-`catalyst-tab-group` organize all tab-panel data into separate view where only one view can be visible at a time. Each tab's label is shown in the tab header. You can fully customize using css class.
+- **Standalone Components**: No module imports required.
+- **Orientation Support**: Supports both horizontal and vertical tab layouts.
+- **Signals Based**: Built using Angular Signals for optimal performance and change detection.
+- **Responsive**: Automatic scrolling for overflow tabs with touch support.
+- **Customizable**: Full control over styling via CSS classes.
+- **Accessible**: Built with ARIA attributes for accessibility.
 
-The active tab may be set using the `selectedIndex` input or when the user selects one of the tab labels in the heade. It's except number only.
+## Usage
 
-## Use of CatalystTabGroup
+### 1. Import the components
 
-### First impornt CatalystTabModule in the root module(AppModule):
+Import `CatalystTabGroup` and `CatalystTabComponent` in your component or module:
 
-```
-import { CatalystTabModule } from 'catalyst-tab-group'
-
-@NgModule({
-  imports: [
-    // ...
-    CatalystTabModule
-  ],
-})
-export class AppModule {}
-```
-
-### Events
-
-The **onSelectedIndexChange** output event is emitted when the active tab changes.
-
-### In your app.component.ts :
-
-```
-import { TabGroupConfig } from 'catalyst-tab-group';
+```typescript
+import { Component } from '@angular/core';
+import {
+  CatalystTabGroup,
+  CatalystTabComponent,
+  TabGroupConfig,
+} from '@catalyst-cli/catalyst-tab-group';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [CatalystTabGroup, CatalystTabComponent],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-   config: TabGroupConfig = {
-     position: 'vertical', // Two option for this 'horizontal' or 'vertical', Default value is horizontal.
-     taClass: string, // Pass your class for tab here, default null
-     coClass: string  // Pass your class for tab-panel here, default null
-   }
+  // Optional configuration
+  tabConfig: TabGroupConfig = {
+    position: 'horizontal', // 'horizontal' | 'vertical'
+    taClass: 'my-custom-tab-class', // Custom class for tab container
+    coClass: 'my-custom-content-class', // Custom class for content area
+  };
 
-   index = 0;
+  selectedIndex = 0;
 
-   onClick() {
-    if (this.config.position === 'horizontal') {
-      this.config.position = 'vertical'
-    } else {
-      this.config.position = 'horizontal'
-    }
+  onTabChange(index: number) {
+    console.log('Selected tab index:', index);
+    this.selectedIndex = index;
   }
-
-   onChange(event) {
-     this.index = event;
-     // ... do whatever you want on tab change event
-   }
 }
 ```
 
-### How to use in your app.component.html.
+### 2. Use in your template
 
+```html
+<catalyst-tab-group
+  [tabGroupConfig]="tabConfig"
+  [(selectedIndex)]="selectedIndex"
+  (selectedIndexChange)="onTabChange($event)"
+>
+  <catalyst-tab label="First Tab">
+    <div class="p-4">
+      <h3>First Tab Content</h3>
+      <p>This is the content for the first tab.</p>
+    </div>
+  </catalyst-tab>
+
+  <catalyst-tab label="Second Tab">
+    <div class="p-4">
+      <h3>Second Tab Content</h3>
+      <p>This is the content for the second tab.</p>
+    </div>
+  </catalyst-tab>
+</catalyst-tab-group>
 ```
 
-<catalyst-tab-group [tabGroupConfig]="config" [selectedIndex]="index" (onSelectedIndexChange)="onChange($event)">
-    <catalyst-tab label="First">
-        Containt-1
-    </catalyst-tab>
-    <catalyst-tab label="Second">
-        Containt-2
-    </catalyst-tab>
-</catalyst-tab-group>
+You can also use a simple static label:
 
+```html
+<catalyst-tab-group>
+  <catalyst-tab label="Simple"> Content goes here... </catalyst-tab>
+</catalyst-tab-group>
+```
+
+## API
+
+### CatalystTabGroup (`<catalyst-tab-group>`)
+
+| Input            | Type             | Default                           | Description                                                      |
+| ---------------- | ---------------- | --------------------------------- | ---------------------------------------------------------------- |
+| `tabGroupConfig` | `TabGroupConfig` | `{ position: 'horizontal', ... }` | Configuration object for layout and styling.                     |
+| `selectedIndex`  | `number`         | `0`                               | The index of the currently active tab. Supports two-way binding. |
+
+### CatalystTabComponent (`<catalyst-tab>`)
+
+| Input   | Type     | Required | Description                                 |
+| ------- | -------- | -------- | ------------------------------------------- |
+| `label` | `string` | **Yes**  | The label text displayed in the tab header. |
+
+### TabGroupConfig Interface
+
+```typescript
+interface TabGroupConfig {
+  position: 'horizontal' | 'vertical';
+  taClass: string; // Class for the tab header container
+  coClass: string; // Class for the tab content container
+}
+```
+
+## Styling
+
+You can customize the appearance by passing custom classes via `taClass` (for the tab list) and `coClass` (for the content area) in the `tabGroupConfig`.
+
+Example SCSS to override default styles:
+
+```scss
+// In your global styles or component styles (if using ::ng-deep)
+.my-custom-tab-class {
+  background-color: #f5f5f5;
+
+  li.active {
+    border-bottom: 2px solid primary-color;
+  }
+}
 ```

@@ -27,7 +27,7 @@ npm install
 npm run build:lib
 ```
 
-This will create the distributable files in `dist/ngx-dynamic-widget/`.
+This will create the distributable files in `dist/@catalyst-cli/dynamic-widget/`.
 
 ## Test the Build Locally
 
@@ -125,6 +125,7 @@ If you want to publish under a scope (e.g., `@your-org/ngx-dynamic-widget`):
 ## Post-Publishing
 
 1. Create a Git tag for the version:
+
    ```bash
    git tag v1.0.0
    git push origin v1.0.0
@@ -139,4 +140,3 @@ If you want to publish under a scope (e.g., `@your-org/ngx-dynamic-widget`):
 - The `prepublishOnly` script automatically builds the library before publishing
 - Never commit `node_modules/` or `dist/` folders
 - Always test the build locally before publishing
-

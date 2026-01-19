@@ -9,7 +9,8 @@
     "navigation",
     "steps",
     "components",
-    "angular21"
+    "angular21",
+    "@catalyst-cli"
   ],
   "author": "Anindya Giri",
   "license": "MIT",
