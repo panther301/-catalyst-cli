@@ -68,6 +68,10 @@ $tab-config: (
 
   ul {
     @include tab-list-reset;
+
+    &.reset-transform {
+      transform: translateX(0px) !important;
+    }
     height: 100%;
     align-items: center;
     display: flex;

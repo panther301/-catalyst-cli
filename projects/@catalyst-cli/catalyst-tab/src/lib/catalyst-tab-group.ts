@@ -58,7 +58,7 @@ const RESIZE_DEBOUNCE_MS = 100;
           <p>&lsaquo;</p>
         </span>
       }
-      <ul [style.transform]="sStyle()">
+      <ul [style.transform]="sStyle()" [class.reset-transform]="!isHorizontal()">
         @for (tab of tabs(); track $index) {
           <li
             (click)="selectTab(tab, true)"
@@ -167,6 +167,12 @@ export class CatalystTabGroup implements AfterViewInit {
       // triggers on tabs change
       this.tabs();
       // Use setTimeout to allow DOM to settle if needed, or just check
+      setTimeout(() => this.onResize(), 0);
+    });
+
+    // Effect to handle configuration changes (e.g. orientation switch)
+    effect(() => {
+      this.tabGroupConfig();
       setTimeout(() => this.onResize(), 0);
     });
   }
@@ -300,7 +306,7 @@ export class CatalystTabGroup implements AfterViewInit {
     const tabsLength = this.tabs().length;
     const visibleTabs = Math.floor(offsetWidth / TAB_WIDTH);
     const maxLeft = Math.max(0, tabsLength - visibleTabs);
-    const isScrollable = tabsLength * TAB_WIDTH > offsetWidth;
+    const isScrollable = this.isHorizontal() && tabsLength * TAB_WIDTH > offsetWidth;
 
     return { offsetWidth, tabsLength, visibleTabs, maxLeft, isScrollable };
   }

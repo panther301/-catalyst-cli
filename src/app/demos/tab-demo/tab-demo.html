@@ -209,90 +209,98 @@
           <div class="divider"></div>
 
           <h4>Inputs</h4>
-          <table class="api-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>tabGroupConfig</code></td>
-                <td><code>TabGroupConfig</code></td>
-                <td>
-                  <code>{{ '{' }} position: 'horizontal', taClass: '', coClass: '' {{ '}' }}</code>
-                </td>
-                <td>
-                  Configuration object for tab layout and styling. Controls orientation and CSS
-                  classes.
-                </td>
-              </tr>
-              <tr>
-                <td><code>selectedIndex</code></td>
-                <td><code>number</code></td>
-                <td><code>0</code></td>
-                <td>
-                  Index of the currently selected tab (zero-based). Supports two-way binding with
-                  <code>[(selectedIndex)]</code>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="api-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>tabGroupConfig</code></td>
+                  <td><code>TabGroupConfig</code></td>
+                  <td>
+                    <code
+                      >{{ '{' }} position: 'horizontal', taClass: '', coClass: '' {{ '}' }}</code
+                    >
+                  </td>
+                  <td>
+                    Configuration object for tab layout and styling. Controls orientation and CSS
+                    classes.
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>selectedIndex</code></td>
+                  <td><code>number</code></td>
+                  <td><code>0</code></td>
+                  <td>
+                    Index of the currently selected tab (zero-based). Supports two-way binding with
+                    <code>[(selectedIndex)]</code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <h4 class="mt-4">Outputs</h4>
-          <table class="api-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Example</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>selectedIndexChange</code></td>
-                <td><code>number</code></td>
-                <td>
-                  Emitted when the selected tab changes (user click or programmatic). Auto-created
-                  by Angular's <code>model()</code> signal.
-                </td>
-                <td>
-                  <code>[(selectedIndex)]="index"</code> or
-                  <code>(selectedIndexChange)="onChange($event)"</code>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="api-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                  <th>Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>selectedIndexChange</code></td>
+                  <td><code>number</code></td>
+                  <td>
+                    Emitted when the selected tab changes (user click or programmatic). Auto-created
+                    by Angular's <code>model()</code> signal.
+                  </td>
+                  <td>
+                    <code>[(selectedIndex)]="index"</code> or
+                    <code>(selectedIndexChange)="onChange($event)"</code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <h4 class="mt-4">Public Properties</h4>
-          <table class="api-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>tabs</code></td>
-                <td><code>Signal&lt;CatalystTabComponent[]&gt;</code></td>
-                <td>
-                  Read-only signal containing all child tab components (via
-                  <code>contentChildren</code>)
-                </td>
-              </tr>
-              <tr>
-                <td><code>isHorizontal</code></td>
-                <td><code>Signal&lt;boolean&gt;</code></td>
-                <td>Computed signal indicating if orientation is horizontal</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="api-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>tabs</code></td>
+                  <td><code>Signal&lt;CatalystTabComponent[]&gt;</code></td>
+                  <td>
+                    Read-only signal containing all child tab components (via
+                    <code>contentChildren</code>)
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>isHorizontal</code></td>
+                  <td><code>Signal&lt;boolean&gt;</code></td>
+                  <td>Computed signal indicating if orientation is horizontal</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <h4 class="mt-4">TabGroupConfig Interface</h4>
           <pre><code>{{ apiConfigCode }}</code></pre>
@@ -301,62 +309,66 @@
           <div class="divider"></div>
 
           <h4>Inputs</h4>
-          <table class="api-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Required</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>label</code></td>
-                <td><code>string</code></td>
-                <td>✅ Yes</td>
-                <td>
-                  Text displayed in the tab header. This is an alias for the
-                  <code>title</code> input for better semantics.
-                </td>
-              </tr>
-              <tr>
-                <td><code>active</code></td>
-                <td><code>boolean</code></td>
-                <td>No</td>
-                <td>
-                  Controls whether this tab is active/visible. Managed automatically by parent, but
-                  can be used for custom control. Supports two-way binding.
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="api-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Required</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>label</code></td>
+                  <td><code>string</code></td>
+                  <td>✅ Yes</td>
+                  <td>
+                    Text displayed in the tab header. This is an alias for the
+                    <code>title</code> input for better semantics.
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>active</code></td>
+                  <td><code>boolean</code></td>
+                  <td>No</td>
+                  <td>
+                    Controls whether this tab is active/visible. Managed automatically by parent,
+                    but can be used for custom control. Supports two-way binding.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <h4 class="mt-4">Outputs</h4>
-          <table class="api-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Example</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>activeChange</code></td>
-                <td><code>boolean</code></td>
-                <td>
-                  Emitted when the active state changes. Auto-created by Angular's
-                  <code>model()</code> signal.
-                </td>
-                <td>
-                  <code>[(active)]="isActive"</code> or
-                  <code>(activeChange)="onActiveChange($event)"</code>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="api-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                  <th>Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>activeChange</code></td>
+                  <td><code>boolean</code></td>
+                  <td>
+                    Emitted when the active state changes. Auto-created by Angular's
+                    <code>model()</code> signal.
+                  </td>
+                  <td>
+                    <code>[(active)]="isActive"</code> or
+                    <code>(activeChange)="onActiveChange($event)"</code>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <h4 class="mt-4">Usage Notes</h4>
           <div class="usage-notes">

@@ -57,3 +57,23 @@ html {
 html:hover {
   scrollbar-color: #cbd5e1 transparent;
 }
+
+// Global Responsive Table Wrapper
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1rem 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: white;
+
+  table {
+    margin: 0 !important; // Override demo styles
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    white-space: nowrap; // Prevent wrapping for better scroll experience
+
+    // Ensure header sticks if we want, or just let it scroll
+  }
+}

@@ -157,53 +157,57 @@
           <div class="divider"></div>
 
           <h4>Inputs</h4>
-          <table class="api-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>widgets</code></td>
-                <td><code>IWidget[]</code></td>
-                <td><code>[]</code></td>
-                <td>Array of widget configurations to display</td>
-              </tr>
-              <tr>
-                <td><code>isEdit</code></td>
-                <td><code>boolean</code></td>
-                <td><code>false</code></td>
-                <td>Enable/disable edit mode (drag, resize, delete)</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="api-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>widgets</code></td>
+                  <td><code>IWidget[]</code></td>
+                  <td><code>[]</code></td>
+                  <td>Array of widget configurations to display</td>
+                </tr>
+                <tr>
+                  <td><code>isEdit</code></td>
+                  <td><code>boolean</code></td>
+                  <td><code>false</code></td>
+                  <td>Enable/disable edit mode (drag, resize, delete)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <h4 class="mt-4">Outputs</h4>
-          <table class="api-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>widgetUpdated</code></td>
-                <td><code>EventEmitter&lt;IWidgetUpdateEvent&gt;</code></td>
-                <td>Emitted when widget position/size changes during drag/resize</td>
-              </tr>
-              <tr>
-                <td><code>widgetDeleted</code></td>
-                <td><code>EventEmitter&lt;number&gt;</code></td>
-                <td>Emitted when widget is deleted (provides widget ID)</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="api-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>widgetUpdated</code></td>
+                  <td><code>EventEmitter&lt;IWidgetUpdateEvent&gt;</code></td>
+                  <td>Emitted when widget position/size changes during drag/resize</td>
+                </tr>
+                <tr>
+                  <td><code>widgetDeleted</code></td>
+                  <td><code>EventEmitter&lt;number&gt;</code></td>
+                  <td>Emitted when widget is deleted (provides widget ID)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <h4 class="mt-4">Interfaces</h4>
           <pre><code>{{ interfacesCode }}</code></pre>
@@ -212,36 +216,38 @@
           <div class="divider"></div>
 
           <h4>Methods</h4>
-          <table class="api-table">
-            <thead>
-              <tr>
-                <th>Method</th>
-                <th>Parameters</th>
-                <th>Returns</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>createWidget()</code></td>
-                <td><code>id: number, options: IWidgetCreateOptions</code></td>
-                <td><code>IWidget</code></td>
-                <td>Creates a new widget with the specified configuration</td>
-              </tr>
-              <tr>
-                <td><code>updateWidget()</code></td>
-                <td><code>widget: IWidget, event: IWidgetUpdateEvent</code></td>
-                <td><code>IWidget | null</code></td>
-                <td>Updates widget position/size from drag/resize event</td>
-              </tr>
-              <tr>
-                <td><code>removeWidget()</code></td>
-                <td><code>widgets: IWidget[], id: number</code></td>
-                <td><code>IWidget[]</code></td>
-                <td>Removes widget from array and returns updated array</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="api-table">
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Parameters</th>
+                  <th>Returns</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>createWidget()</code></td>
+                  <td><code>id: number, options: IWidgetCreateOptions</code></td>
+                  <td><code>IWidget</code></td>
+                  <td>Creates a new widget with the specified configuration</td>
+                </tr>
+                <tr>
+                  <td><code>updateWidget()</code></td>
+                  <td><code>widget: IWidget, event: IWidgetUpdateEvent</code></td>
+                  <td><code>IWidget | null</code></td>
+                  <td>Updates widget position/size from drag/resize event</td>
+                </tr>
+                <tr>
+                  <td><code>removeWidget()</code></td>
+                  <td><code>widgets: IWidget[], id: number</code></td>
+                  <td><code>IWidget[]</code></td>
+                  <td>Removes widget from array and returns updated array</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <h4 class="mt-4">Usage Notes</h4>
           <div class="usage-notes">

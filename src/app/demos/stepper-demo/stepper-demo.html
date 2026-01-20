@@ -204,74 +204,78 @@
           <div class="divider"></div>
 
           <h4>Inputs</h4>
-          <table class="api-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>itemMenu</code></td>
-                <td><code>StepperMenu[]</code></td>
-                <td>-</td>
-                <td>
-                  ✅ Required. Array of step configurations (label, description, icon, disabled)
-                </td>
-              </tr>
-              <tr>
-                <td><code>options</code></td>
-                <td><code>IStepperOptions</code></td>
-                <td>
-                  <code>{{ '{' }} orientation: 'vertical', header: 'column' {{ '}' }}</code>
-                </td>
-                <td>Configuration for stepper layout and appearance</td>
-              </tr>
-              <tr>
-                <td><code>activeStep</code></td>
-                <td><code>number</code></td>
-                <td><code>0</code></td>
-                <td>Index of the currently active step (supports two-way binding)</td>
-              </tr>
-              <tr>
-                <td><code>height</code></td>
-                <td><code>string</code></td>
-                <td><code>''</code></td>
-                <td>Optional custom height for the stepper container</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="api-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Default</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>itemMenu</code></td>
+                  <td><code>StepperMenu[]</code></td>
+                  <td>-</td>
+                  <td>
+                    ✅ Required. Array of step configurations (label, description, icon, disabled)
+                  </td>
+                </tr>
+                <tr>
+                  <td><code>options</code></td>
+                  <td><code>IStepperOptions</code></td>
+                  <td>
+                    <code>{{ '{' }} orientation: 'vertical', header: 'column' {{ '}' }}</code>
+                  </td>
+                  <td>Configuration for stepper layout and appearance</td>
+                </tr>
+                <tr>
+                  <td><code>activeStep</code></td>
+                  <td><code>number</code></td>
+                  <td><code>0</code></td>
+                  <td>Index of the currently active step (supports two-way binding)</td>
+                </tr>
+                <tr>
+                  <td><code>height</code></td>
+                  <td><code>string</code></td>
+                  <td><code>''</code></td>
+                  <td>Optional custom height for the stepper container</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <h4 class="mt-4">Outputs</h4>
-          <table class="api-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Description</th>
-                <th>Example</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>activeStepChange</code></td>
-                <td><code>number</code></td>
-                <td>
-                  Emitted when active step changes. Auto-created by <code>model()</code> signal.
-                </td>
-                <td><code>[(activeStep)]="step"</code></td>
-              </tr>
-              <tr>
-                <td><code>onStepChange</code></td>
-                <td><code>EventEmitter&lt;number&gt;</code></td>
-                <td>Emitted when step changes. Provides the new step index.</td>
-                <td><code>(onStepChange)="handleChange($event)"</code></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="api-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Description</th>
+                  <th>Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>activeStepChange</code></td>
+                  <td><code>number</code></td>
+                  <td>
+                    Emitted when active step changes. Auto-created by <code>model()</code> signal.
+                  </td>
+                  <td><code>[(activeStep)]="step"</code></td>
+                </tr>
+                <tr>
+                  <td><code>onStepChange</code></td>
+                  <td><code>EventEmitter&lt;number&gt;</code></td>
+                  <td>Emitted when step changes. Provides the new step index.</td>
+                  <td><code>(onStepChange)="handleChange($event)"</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <h4 class="mt-4">Interfaces</h4>
           <pre><code>{{ interfacesCode }}</code></pre>
@@ -280,30 +284,32 @@
           <div class="divider"></div>
 
           <h4>Inputs</h4>
-          <table class="api-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Required</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code>value</code></td>
-                <td><code>number</code></td>
-                <td>✅ Yes</td>
-                <td>Zero-based index matching the step position</td>
-              </tr>
-              <tr>
-                <td><code>height</code></td>
-                <td><code>string</code></td>
-                <td>No</td>
-                <td>Optional custom height for this step's content</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="api-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Type</th>
+                  <th>Required</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>value</code></td>
+                  <td><code>number</code></td>
+                  <td>✅ Yes</td>
+                  <td>Zero-based index matching the step position</td>
+                </tr>
+                <tr>
+                  <td><code>height</code></td>
+                  <td><code>string</code></td>
+                  <td>No</td>
+                  <td>Optional custom height for this step's content</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
           <h4 class="mt-4">Usage Notes</h4>
           <div class="usage-notes">
