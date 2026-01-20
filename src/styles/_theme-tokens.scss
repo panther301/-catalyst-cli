@@ -1,0 +1,117 @@
+/**
+ * Theme Tokens
+ * CSS Custom Properties for consistent design system
+ */
+
+:root {
+  // Primary Color - Professional Blue
+  --color-primary: #667eea;
+  --color-primary-dark: #5568d3;
+  --color-primary-light: #8b9beb;
+  --color-primary-bg: rgba(102, 126, 234, 0.1);
+
+  // Background Colors
+  --color-background: #ffffff;
+  --color-background-secondary: #f5f5f5;
+  --color-background-tertiary: #f8f9fa;
+  --color-background-elevated: #ffffff;
+  --color-background-code: #1e1e1e;
+
+  // Text Colors
+  --color-text-primary: #333333;
+  --color-text-secondary: #555555;
+  --color-text-tertiary: #666666;
+  --color-text-muted: #9ca3af;
+  --color-text-on-primary: #ffffff;
+  --color-text-code: #d4d4d4;
+
+  // Border Colors
+  --color-border: #e0e0e0;
+  --color-border-light: #e8eaed;
+  --color-border-dark: #d1d5db;
+
+  // Interactive States
+  --color-hover-bg: rgba(102, 126, 234, 0.08);
+  --color-active-bg: rgba(102, 126, 234, 0.12);
+  --color-focus-ring: rgba(102, 126, 234, 0.4);
+
+  // Semantic Colors
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
+
+  // Overlay
+  --color-overlay: rgba(0, 0, 0, 0.5);
+
+  // Code Highlight
+  --color-code-inline: #c7254e;
+  --color-code-inline-bg: #f0f0f0;
+
+  // Scrollbar
+  --color-scrollbar-thumb: #cbd5e1;
+  --color-scrollbar-thumb-hover: #94a3b8;
+
+  // Shadows
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --shadow-xl: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --shadow-button: 0 4px 8px rgba(102, 126, 234, 0.4);
+
+  // Typography
+  --font-family-base:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+    'Helvetica Neue', sans-serif;
+  --font-family-mono: 'Consolas', 'Monaco', 'Courier New', monospace;
+
+  --font-size-xs: 0.6875rem; // 11px
+  --font-size-sm: 0.75rem; // 12px
+  --font-size-base: 0.875rem; // 14px
+  --font-size-md: 0.9375rem; // 15px
+  --font-size-lg: 1rem; // 16px
+  --font-size-xl: 1.25rem; // 20px
+  --font-size-2xl: 1.5rem; // 24px
+  --font-size-3xl: 1.75rem; // 28px
+  --font-size-4xl: 2.25rem; // 36px
+  --font-size-5xl: 3rem; // 48px
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.3;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.8;
+
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+
+  // Spacing (using 4px base)
+  --spacing-0: 0;
+  --spacing-1: 0.25rem; // 4px
+  --spacing-2: 0.5rem; // 8px
+  --spacing-3: 0.75rem; // 12px
+  --spacing-4: 1rem; // 16px
+  --spacing-5: 1.25rem; // 20px
+  --spacing-6: 1.5rem; // 24px
+  --spacing-7: 1.75rem; // 28px
+  --spacing-8: 2rem; // 32px
+  --spacing-10: 2.5rem; // 40px
+  --spacing-12: 3rem; // 48px
+
+  // Border Radius
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-full: 9999px;
+
+  // Transitions
+  --transition-fast: 0.15s;
+  --transition-base: 0.2s;
+  --transition-slow: 0.3s;
+  --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
+}

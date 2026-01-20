@@ -131,11 +131,11 @@
                 </div>
                 <div class="divider"></div>
                 <app-catalyst-stepper
-                  [itemMenu]="exampleSteps()"
+                  [itemMenu]="exampleSteps1()"
                   [options]="{ orientation: 'horizontal', header: headerLayout() }"
                   [(activeStep)]="ex2Step"
                 >
-                  @for (step of exampleSteps(); track $index) {
+                  @for (step of exampleSteps1(); track $index) {
                     <app-catalyst-step-body [value]="$index">
                       <div class="step-content">
                         <h4>{{ step.label }}</h4>

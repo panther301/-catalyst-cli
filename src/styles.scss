@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-/* You can add global styles to this file, and also import other style files */
+@use 'styles/theme-tokens';
+@use 'styles/global-components';
 
 * {
   margin: 0;
@@ -11,15 +12,15 @@ html,
 body {
   height: 100%;
   width: 100%;
-  font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
-    'Helvetica Neue', sans-serif;
+  font-family: var(--font-family-base);
 }
 
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--color-background);
+  color: var(--color-text-primary);
 }
 
 /* Global Custom Scrollbar */
@@ -34,17 +35,17 @@ body {
 
 ::-webkit-scrollbar-thumb {
   background: transparent;
-  border-radius: 4px;
-  transition: all 0.3s ease;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-slow) var(--transition-ease);
 }
 
 /* Show scrollbar thumb on hover */
 *:hover::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--color-scrollbar-thumb);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8 !important; // Darker on direct hover
+  background: var(--color-scrollbar-thumb-hover) !important;
 }
 
 // Firefox
@@ -53,9 +54,9 @@ html {
   scrollbar-color: transparent transparent;
 }
 
-// Firefox hover - limited support, effectively shows on hover of the root
+// Firefox hover
 html:hover {
-  scrollbar-color: #cbd5e1 transparent;
+  scrollbar-color: var(--color-scrollbar-thumb) transparent;
 }
 
 // Global Responsive Table Wrapper
@@ -64,16 +65,14 @@ html:hover {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   margin: 1rem 0;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  background: var(--color-background);
 
   table {
-    margin: 0 !important; // Override demo styles
+    margin: 0 !important;
     box-shadow: none !important;
     border-radius: 0 !important;
-    white-space: nowrap; // Prevent wrapping for better scroll experience
-
-    // Ensure header sticks if we want, or just let it scroll
+    white-space: nowrap;
   }
 }

@@ -3,27 +3,27 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  background: #f5f5f5;
-  overflow-x: hidden; // Prevent horizontal scroll
+  background: var(--color-background-secondary);
+  overflow-x: hidden;
 
   .demo-header {
-    height: 80px; // Fixed height
-    padding: 0 2rem; // Remove vertical padding
-    display: flex; // Ensure vertical centering
+    height: 80px;
+    padding: 0 var(--spacing-8);
+    display: flex;
     align-items: center;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: var(--color-primary);
+    box-shadow: var(--shadow-md);
 
     .demo-header-content {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: var(--spacing-4);
 
       h2 {
         margin: 0;
-        font-size: 1.75rem;
-        font-weight: 600;
-        color: white;
+        font-size: var(--font-size-3xl);
+        font-weight: var(--font-weight-semibold);
+        color: var(--color-text-on-primary);
       }
     }
 
@@ -38,40 +38,40 @@
   .demo-content {
     flex: 1;
     overflow-y: auto;
-    overflow-x: hidden; // Prevent horizontal scroll
-    padding: 2rem;
+    overflow-x: hidden;
+    padding: var(--spacing-8);
     max-height: calc(100vh - 90px);
-    background: white;
+    background: var(--color-background);
   }
 }
 
 // Overview Section
 .overview-section {
   p {
-    line-height: 1.6;
-    color: #555;
+    line-height: var(--line-height-normal);
+    color: var(--color-text-secondary);
   }
 
   .feature-section {
-    margin-top: 2.5rem;
+    margin-top: var(--spacing-10);
 
     h3 {
-      color: #333;
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
+      color: var(--color-text-primary);
+      font-size: var(--font-size-2xl);
+      margin-bottom: var(--spacing-2);
     }
 
     h4 {
-      color: #555;
+      color: var(--color-text-secondary);
       font-size: 1.1rem;
-      margin-top: 1.5rem;
-      margin-bottom: 0.75rem;
+      margin-top: var(--spacing-6);
+      margin-bottom: var(--spacing-3);
     }
 
     .divider {
       height: 2px;
-      background: linear-gradient(90deg, #667eea, #764ba2);
-      margin-bottom: 1rem;
+      background: var(--color-primary);
+      margin-bottom: var(--spacing-4);
     }
 
     ul {
@@ -79,15 +79,15 @@
       padding-left: 0;
 
       li {
-        padding: 0.5rem 0;
-        padding-left: 1.5rem;
+        padding: var(--spacing-2) 0;
+        padding-left: var(--spacing-6);
         position: relative;
 
         &::before {
           content: '✓';
           position: absolute;
           left: 0;
-          color: #667eea;
+          color: var(--color-primary);
           font-weight: bold;
         }
       }
@@ -98,30 +98,30 @@
 // Examples Section
 .examples-section {
   .example-block {
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: var(--spacing-12);
+    padding-bottom: var(--spacing-8);
+    border-bottom: 1px solid var(--color-border);
 
     &:last-child {
       border-bottom: none;
     }
 
     h3 {
-      color: #333;
+      color: var(--color-text-primary);
       font-size: 1.4rem;
-      margin-bottom: 0.75rem;
+      margin-bottom: var(--spacing-3);
     }
 
     p {
-      color: #666;
-      margin-bottom: 1.5rem;
+      color: var(--color-text-tertiary);
+      margin-bottom: var(--spacing-6);
     }
 
     .example-demo {
       display: grid;
       grid-template-columns: 1fr 1.2fr;
-      gap: 2rem;
-      margin-top: 1.5rem;
+      gap: var(--spacing-8);
+      margin-top: var(--spacing-6);
 
       @media (max-width: 992px) {
         grid-template-columns: 1fr;
@@ -133,28 +133,27 @@
       }
 
       .demo-area {
-        padding: 1.5rem;
-        background: #f8f9fa;
-        border-radius: 8px;
-        border: 1px solid #e0e0e0;
-        // Remove overflow-x to let tab group handle its own scrolling
-        min-width: 0; // Allow flex/grid child to shrink below content size
+        padding: var(--spacing-6);
+        background: var(--color-background-tertiary);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--color-border);
+        min-width: 0;
 
         .demo-button {
-          padding: 0.6rem 1.5rem;
-          background: linear-gradient(135deg, #667eea, #764ba2);
-          color: white;
+          padding: 0.6rem var(--spacing-6);
+          background: var(--gradient-primary);
+          color: var(--color-text-on-primary);
           border: none;
-          border-radius: 6px;
-          font-size: 0.95rem;
-          font-weight: 500;
+          border-radius: var(--radius-md);
+          font-size: var(--font-size-base);
+          font-weight: var(--font-weight-medium);
           cursor: pointer;
-          transition: all 0.3s ease;
-          margin-bottom: 1rem;
+          transition: all var(--transition-slow) ease;
+          margin-bottom: var(--spacing-4);
 
           &:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.4);
+            box-shadow: var(--shadow-button);
           }
 
           &:active {
@@ -165,31 +164,31 @@
         .index-controls {
           display: flex;
           flex-wrap: wrap;
-          gap: 0.75rem;
+          gap: var(--spacing-3);
           align-items: center;
-          margin-bottom: 1rem;
+          margin-bottom: var(--spacing-4);
 
           p {
             margin: 0;
-            padding: 0.6rem 1rem;
-            background: white;
-            border-radius: 6px;
-            font-weight: 500;
+            padding: 0.6rem var(--spacing-4);
+            background: var(--color-background);
+            border-radius: var(--radius-md);
+            font-weight: var(--font-weight-medium);
           }
         }
 
         .divider {
           height: 2px;
-          background: #e0e0e0;
-          margin: 1rem 0;
+          background: var(--color-border);
+          margin: var(--spacing-4) 0;
         }
       }
 
       .code-area {
-        background: #1e1e1e;
-        border-radius: 8px;
+        background: var(--color-background-code);
+        border-radius: var(--radius-lg);
         overflow: hidden;
-        border: 1px solid #333;
+        border: 1px solid var(--color-border-dark);
       }
     }
   }
@@ -197,17 +196,17 @@
 
 // Code Blocks
 pre {
-  background: #1e1e1e;
-  color: #d4d4d4;
-  padding: 1.25rem;
-  border-radius: 6px;
+  background: var(--color-background-code);
+  color: var(--color-text-code);
+  padding: var(--spacing-5);
+  border-radius: var(--radius-md);
   overflow-x: auto;
-  margin: 1rem 0;
-  font-size: 0.875rem;
-  line-height: 1.6;
+  margin: var(--spacing-4) 0;
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-normal);
 
   code {
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-family: var(--font-family-mono);
     white-space: pre;
   }
 }
@@ -215,66 +214,66 @@ pre {
 // API Reference Section
 .api-section {
   h3 {
-    color: #333;
-    font-size: 1.5rem;
-    margin-top: 2rem;
-    margin-bottom: 0.5rem;
+    color: var(--color-text-primary);
+    font-size: var(--font-size-2xl);
+    margin-top: var(--spacing-8);
+    margin-bottom: var(--spacing-2);
   }
 
   h4 {
-    color: #555;
+    color: var(--color-text-secondary);
     font-size: 1.2rem;
-    margin-top: 1.5rem;
-    margin-bottom: 0.75rem;
+    margin-top: var(--spacing-6);
+    margin-bottom: var(--spacing-3);
   }
 
   .divider {
     height: 2px;
-    background: linear-gradient(90deg, #667eea, #764ba2);
-    margin-bottom: 1.5rem;
+    background: var(--color-primary);
+    margin-bottom: var(--spacing-6);
   }
 
   .api-table {
     width: 100%;
     border-collapse: collapse;
-    margin: 1rem 0;
-    background: white;
-    border-radius: 8px;
+    margin: var(--spacing-4) 0;
+    background: var(--color-background);
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-sm);
 
     thead {
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
+      background: var(--color-primary);
+      color: var(--color-text-on-primary);
 
       th {
-        padding: 1rem;
+        padding: var(--spacing-4);
         text-align: left;
-        font-weight: 600;
+        font-weight: var(--font-weight-semibold);
       }
     }
 
     tbody {
       tr {
-        border-bottom: 1px solid #e0e0e0;
+        border-bottom: 1px solid var(--color-border);
 
         &:last-child {
           border-bottom: none;
         }
 
         &:nth-child(even) {
-          background: #f8f9fa;
+          background: var(--color-background-tertiary);
         }
 
         td {
-          padding: 0.875rem 1rem;
+          padding: 0.875rem var(--spacing-4);
 
           code {
-            background: #f0f0f0;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
+            background: var(--color-code-inline-bg);
+            padding: 0.2rem var(--spacing-2);
+            border-radius: var(--radius-sm);
             font-size: 0.85rem;
-            color: #c7254e;
+            color: var(--color-code-inline);
           }
         }
       }
@@ -282,94 +281,94 @@ pre {
   }
 
   .mt-4 {
-    margin-top: 2rem;
+    margin-top: var(--spacing-8);
   }
 
   .mt-5 {
-    margin-top: 3rem;
+    margin-top: var(--spacing-12);
   }
 
   .usage-notes {
-    background: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: 8px;
-    border-left: 4px solid #667eea;
-    margin-top: 1rem;
+    background: var(--color-background-tertiary);
+    padding: var(--spacing-6);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid var(--color-primary);
+    margin-top: var(--spacing-4);
 
     p {
-      margin: 0.75rem 0;
-      line-height: 1.6;
+      margin: var(--spacing-3) 0;
+      line-height: var(--line-height-normal);
 
       strong {
-        color: #333;
+        color: var(--color-text-primary);
       }
     }
 
     ul {
-      margin: 0.5rem 0;
-      padding-left: 1.5rem;
+      margin: var(--spacing-2) 0;
+      padding-left: var(--spacing-6);
 
       li {
-        margin: 0.5rem 0;
-        line-height: 1.6;
+        margin: var(--spacing-2) 0;
+        line-height: var(--line-height-normal);
 
         code {
-          background: white;
-          padding: 0.2rem 0.5rem;
-          border-radius: 4px;
+          background: var(--color-background);
+          padding: 0.2rem var(--spacing-2);
+          border-radius: var(--radius-sm);
           font-size: 0.85rem;
-          color: #c7254e;
+          color: var(--color-code-inline);
         }
       }
     }
 
     code {
-      background: white;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
+      background: var(--color-background);
+      padding: 0.2rem var(--spacing-2);
+      border-radius: var(--radius-sm);
       font-size: 0.85rem;
-      color: #c7254e;
+      color: var(--color-code-inline);
     }
   }
 }
 
 // Custom tab styles for Example 3
 ::ng-deep .custom-tab-style {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 0.5rem;
-  border-radius: 8px 8px 0 0;
+  background: var(--color-primary);
+  padding: var(--spacing-2);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 
   ul {
-    gap: 0.5rem;
+    gap: var(--spacing-2);
 
     li {
       color: rgba(255, 255, 255, 0.8);
       background: rgba(255, 255, 255, 0.1);
-      border-radius: 6px;
+      border-radius: var(--radius-md);
       padding: 0.6rem 1.2rem;
-      transition: all 0.3s ease;
+      transition: all var(--transition-slow) ease;
 
       &:hover {
         background: rgba(255, 255, 255, 0.15);
-        color: white;
+        color: var(--color-text-on-primary);
       }
 
       &.active {
-        background: white;
-        color: #667eea;
-        font-weight: 600;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+        background: var(--color-background);
+        color: var(--color-primary);
+        font-weight: var(--font-weight-semibold);
+        box-shadow: var(--shadow-sm);
       }
     }
   }
 }
 
 ::ng-deep .custom-content-style {
-  background: #f8f9fa;
-  padding: 2rem;
-  border-radius: 0 0 8px 8px;
+  background: var(--color-background-tertiary);
+  padding: var(--spacing-8);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
   min-height: 150px;
-  border: 2px solid #667eea;
+  border: 2px solid var(--color-primary);
   border-top: none;
 }
 

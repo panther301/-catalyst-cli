@@ -25,6 +25,11 @@ export class StepperDemo {
   mobileView = signal(false); // Mobile view toggle
 
   exampleSteps = signal<StepperMenu[]>([
+    { label: 'Getting Started', description: 'Begin your journey' },
+    { label: 'Configuration', description: 'Set up your preferences' },
+    { label: 'Completion', description: 'All done!' },
+  ]);
+  exampleSteps1 = signal<StepperMenu[]>([
     { label: 'Getting Started', description: 'Begin your journey', icon: '🚀' },
     { label: 'Configuration', description: 'Set up your preferences', icon: '⚙️' },
     { label: 'Completion', description: 'All done!', icon: '✓' },
