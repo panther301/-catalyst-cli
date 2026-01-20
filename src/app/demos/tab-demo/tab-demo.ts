@@ -1,11 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CatalystTabGroup, CatalystTabComponent, TabGroupConfig } from '@catalyst-cli/catalyst-tab';
+import { DemoPageHeader } from '../../shared/components/demo-page-header/demo-page-header';
+import { DemoPageLayout } from '../../shared/components/demo-page-layout/demo-page-layout';
 
 @Component({
   selector: 'app-tab-demo',
   standalone: true,
-  imports: [CommonModule, CatalystTabGroup, CatalystTabComponent],
+  imports: [CommonModule, CatalystTabGroup, CatalystTabComponent, DemoPageHeader, DemoPageLayout],
   templateUrl: './tab-demo.html',
   styleUrl: './tab-demo.scss',
 })
