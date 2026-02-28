@@ -91,6 +91,24 @@ $tab-config: (
       flex-shrink: 0;
     }
   }
+
+  .tab-prefix {
+    padding-left: 16px;
+    padding-right: 8px;
+    display: flex;
+    align-items: center;
+    z-index: 5;
+    white-space: nowrap;
+  }
+
+  .tab-suffix {
+    margin-left: auto; /* Push to the right */
+    padding-right: 16px;
+    display: flex;
+    align-items: center;
+    z-index: 5;
+    white-space: nowrap;
+  }
 }
 
 .tab-vertical-menu {

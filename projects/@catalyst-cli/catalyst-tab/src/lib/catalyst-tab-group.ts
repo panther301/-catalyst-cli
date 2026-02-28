@@ -58,6 +58,11 @@ const RESIZE_DEBOUNCE_MS = 100;
           <p>&lsaquo;</p>
         </span>
       }
+      @if (isHorizontal()) {
+        <div class="tab-prefix">
+          <ng-content select="[tabPrefix]"></ng-content>
+        </div>
+      }
       <ul [style.transform]="sStyle()" [class.reset-transform]="!isHorizontal()">
         @for (tab of tabs(); track $index) {
           <li
@@ -73,6 +78,11 @@ const RESIZE_DEBOUNCE_MS = 100;
           </li>
         }
       </ul>
+      @if (isHorizontal()) {
+        <div class="tab-suffix">
+          <ng-content select="[tabSuffix]"></ng-content>
+        </div>
+      }
       @if (isHorizontal()) {
         <span
           class="change-btn next"

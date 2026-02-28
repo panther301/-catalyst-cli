@@ -18,17 +18,18 @@ npm i @catalyst-cli/catalyst-tab-group
 - **Orientation Support**: Supports both horizontal and vertical tab layouts.
 - **Signals Based**: Built using Angular Signals for optimal performance and change detection.
 - **Responsive**: Automatic scrolling for overflow tabs with touch support.
+- **Prefix & Suffix Slots**: Project custom content (like icons, buttons, or badges) to the left or right of the tab bar.
 - **Customizable**: Full control over styling via CSS classes.
-- **Accessible**: Built with ARIA attributes for accessibility.
+- **Accessible**: Built with ARIA attributes and keyboard navigation support.
 
 ## Usage
 
 ### 1. Import the components
 
-Import `CatalystTabGroup` and `CatalystTabComponent` in your component or module:
+Import `CatalystTabGroup` and `CatalystTabComponent` in your standalone component or module:
 
 ```typescript
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   CatalystTabGroup,
   CatalystTabComponent,
@@ -39,8 +40,27 @@ import {
   selector: 'app-root',
   standalone: true,
   imports: [CatalystTabGroup, CatalystTabComponent],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  template: `
+    <catalyst-tab-group [tabGroupConfig]="tabConfig" [(selectedIndex)]="selectedIndex">
+      <!-- Optional: Add custom content to the left of tabs -->
+      <div tabPrefix>
+        <button>Search</button>
+      </div>
+
+      <!-- Optional: Add custom content to the right of tabs -->
+      <div tabSuffix>
+        <button>Settings</button>
+      </div>
+
+      <catalyst-tab label="First Tab">
+        <div class="content">First Tab Content</div>
+      </catalyst-tab>
+
+      <catalyst-tab label="Second Tab">
+        <div class="content">Second Tab Content</div>
+      </catalyst-tab>
+    </catalyst-tab-group>
+  `,
 })
 export class AppComponent {
   // Optional configuration
@@ -50,12 +70,8 @@ export class AppComponent {
     coClass: 'my-custom-content-class', // Custom class for content area
   };
 
-  selectedIndex = 0;
-
-  onTabChange(index: number) {
-    console.log('Selected tab index:', index);
-    this.selectedIndex = index;
-  }
+  // Two-way bound selected index
+  selectedIndex = signal(0);
 }
 ```
 
@@ -95,10 +111,15 @@ You can also use a simple static label:
 
 ### CatalystTabGroup (`<catalyst-tab-group>`)
 
-| Input            | Type             | Default                           | Description                                                      |
-| ---------------- | ---------------- | --------------------------------- | ---------------------------------------------------------------- |
-| `tabGroupConfig` | `TabGroupConfig` | `{ position: 'horizontal', ... }` | Configuration object for layout and styling.                     |
-| `selectedIndex`  | `number`         | `0`                               | The index of the currently active tab. Supports two-way binding. |
+| Input            | Type             | Default                                                | Description                                                                          |
+| ---------------- | ---------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `tabGroupConfig` | `TabGroupConfig` | `{ position: 'horizontal', taClass: '', coClass: '' }` | Configuration object for layout and styling.                                         |
+| `selectedIndex`  | `number`         | `0`                                                    | The index of the currently active tab. Supports two-way binding `[(selectedIndex)]`. |
+
+#### Content Projection (Slots)
+
+- `[tabPrefix]`: Projects content to the left side of the tab bar (horizontal orientation only).
+- `[tabSuffix]`: Projects content to the right side of the tab bar (horizontal orientation only).
 
 ### CatalystTabComponent (`<catalyst-tab>`)
 
@@ -111,24 +132,30 @@ You can also use a simple static label:
 ```typescript
 interface TabGroupConfig {
   position: 'horizontal' | 'vertical';
-  taClass: string; // Class for the tab header container
-  coClass: string; // Class for the tab content container
+  taClass: string; // Custom CSS class for the tab header container
+  coClass: string; // Custom CSS class for the tab content container
 }
 ```
 
 ## Styling
 
-You can customize the appearance by passing custom classes via `taClass` (for the tab list) and `coClass` (for the content area) in the `tabGroupConfig`.
+You can deeply customize the appearance by passing custom classes via `taClass` (for the tab list) and `coClass` (for the content area) in the `tabGroupConfig`.
 
 Example SCSS to override default styles:
 
 ```scss
-// In your global styles or component styles (if using ::ng-deep)
-.my-custom-tab-class {
+// In your global styles or component styles (using ::ng-deep)
+::ng-deep .my-custom-tab-class {
   background-color: #f5f5f5;
 
-  li.active {
-    border-bottom: 2px solid primary-color;
+  li {
+    color: #666;
+
+    &.active {
+      border-bottom: 2px solid #667eea;
+      color: #667eea;
+      font-weight: bold;
+    }
   }
 }
 ```

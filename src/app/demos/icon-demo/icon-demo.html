@@ -1,0 +1,301 @@
+<app-demo-page-layout>
+  <app-demo-page-header header [title]="'Catalyst Icon Demo'" />
+
+  <catalyst-tab-group>
+    <div tabSuffix>
+      <a href="https://www.npmjs.com/package/@catalyst-cli/catalyst-icon" target="_blank">
+        <img
+          src="https://img.shields.io/npm/v/@catalyst-cli/catalyst-icon?color=blue&label=npm"
+          alt="NPM Badge"
+        />
+      </a>
+    </div>
+    <!-- Overview Tab -->
+    <catalyst-tab label="Overview">
+      <div class="overview-section">
+        <p>
+          Catalyst-icon is an independent Angular library for rendering and managing custom SVG
+          icons. You can register icons as raw SVG strings or load them asynchronously from external
+          URLs. It gives you full control over icon sizing, colors, and styling.
+        </p>
+
+        <div class="feature-section">
+          <h3>Why Catalyst Icon?</h3>
+          <div class="divider"></div>
+          <ul>
+            <li>Centralized icon registry service</li>
+            <li>Support for dynamic URL fetching (local assets or external raw files)</li>
+            <li>Angular Signals for reactive parameter updates</li>
+            <li>Built-in automatic DOM sanitization for secure XSS prevention</li>
+            <li>Flexible styling configuration via inputs and CSS</li>
+          </ul>
+        </div>
+
+        <div class="feature-section">
+          <h3>How to use?</h3>
+          <div class="divider"></div>
+
+          <h4>1) For Standalone Components (Recommended)</h4>
+          <pre><code>{{ importStandaloneCode }}</code></pre>
+
+          <h4>2) For Module-based Apps (Legacy)</h4>
+          <pre><code>{{ importModuleCode }}</code></pre>
+
+          <h4>3) Register Icons (in AppComponent or Main config)</h4>
+          <pre><code>{{ registerCode }}</code></pre>
+        </div>
+      </div>
+    </catalyst-tab>
+
+    <!-- Examples Tab -->
+    <catalyst-tab label="Examples">
+      <div class="examples-section">
+        <!-- Example 1 -->
+        <div class="example-block">
+          <h3>Example 1: Basic Icons</h3>
+          <p>Render icons easily by passing the registered name to the <code>icon</code> input.</p>
+
+          <div class="example-demo">
+            <div class="demo-area">
+              <div class="icon-row">
+                <catalyst-icon icon="pen"></catalyst-icon>
+                <catalyst-icon icon="user"></catalyst-icon>
+                <catalyst-icon icon="settings"></catalyst-icon>
+              </div>
+            </div>
+
+            <div class="code-area">
+              <catalyst-tab-group>
+                <catalyst-tab label="component.ts">
+                  <pre><code>{{ basicExampleTs }}</code></pre>
+                </catalyst-tab>
+                <catalyst-tab label="component.html">
+                  <pre><code>{{ basicExampleHtml }}</code></pre>
+                </catalyst-tab>
+              </catalyst-tab-group>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 2 -->
+        <div class="example-block">
+          <h3>Example 2: Custom Sizing</h3>
+          <p>Customize the size with the <code>height</code> and <code>width</code> inputs.</p>
+
+          <div class="example-demo">
+            <div class="demo-area">
+              <div class="icon-row align-items-end">
+                <catalyst-icon icon="user" height="16" width="16"></catalyst-icon>
+                <catalyst-icon icon="user" height="24" width="24"></catalyst-icon>
+                <catalyst-icon icon="user" height="32" width="32"></catalyst-icon>
+                <catalyst-icon icon="user" height="48" width="48"></catalyst-icon>
+              </div>
+            </div>
+
+            <div class="code-area">
+              <catalyst-tab-group>
+                <catalyst-tab label="component.ts">
+                  <pre><code>{{ sizingExampleTs }}</code></pre>
+                </catalyst-tab>
+                <catalyst-tab label="component.html">
+                  <pre><code>{{ sizingExampleHtml }}</code></pre>
+                </catalyst-tab>
+              </catalyst-tab-group>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 3 -->
+        <div class="example-block">
+          <h3>Example 3: Async Loading (URL)</h3>
+          <p>
+            Register icons from a URL (e.g. raw GitHub or local assets) by passing an object with a
+            <code>url</code> property.
+          </p>
+
+          <div class="example-demo">
+            <div class="demo-area">
+              <div class="icon-row align-items-end">
+                <catalyst-icon icon="github" color="#333" height="32" width="32"></catalyst-icon>
+                <catalyst-icon
+                  icon="coconut-tree"
+                  color="#ff9f43"
+                  height="48"
+                  width="48"
+                ></catalyst-icon>
+                <catalyst-icon
+                  icon="ice-cream"
+                  color="#ee5253"
+                  height="48"
+                  width="48"
+                ></catalyst-icon>
+                <catalyst-icon
+                  icon="take-a-bath"
+                  color="#0abde3"
+                  height="48"
+                  width="48"
+                ></catalyst-icon>
+              </div>
+            </div>
+
+            <div class="code-area">
+              <catalyst-tab-group>
+                <catalyst-tab label="component.ts">
+                  <pre><code>{{ urlExampleTs }}</code></pre>
+                </catalyst-tab>
+                <catalyst-tab label="component.html">
+                  <pre><code>{{ urlExampleHtml }}</code></pre>
+                </catalyst-tab>
+              </catalyst-tab-group>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 4 -->
+        <div class="example-block">
+          <h3>Example 4: Colors & Styling</h3>
+          <p>
+            Use the <code>color</code> input to define the inline style or <code>class</code> for
+            full control. The SVG inherits color through <code>currentColor</code>.
+          </p>
+
+          <div class="example-demo">
+            <div class="demo-area">
+              <div class="icon-row">
+                <catalyst-icon icon="settings" color="#ff4757"></catalyst-icon>
+                <catalyst-icon icon="settings" color="#2ed573"></catalyst-icon>
+                <catalyst-icon icon="settings" color="#1e90ff"></catalyst-icon>
+                <catalyst-icon icon="pen" class="custom-icon-class"></catalyst-icon>
+              </div>
+            </div>
+
+            <div class="code-area">
+              <catalyst-tab-group>
+                <catalyst-tab label="component.ts">
+                  <pre><code>{{ colorsExampleTs }}</code></pre>
+                </catalyst-tab>
+                <catalyst-tab label="component.html">
+                  <pre><code>{{ colorsExampleHtml }}</code></pre>
+                </catalyst-tab>
+                <catalyst-tab label="component.scss">
+                  <pre><code>{{ colorsExampleCss }}</code></pre>
+                </catalyst-tab>
+              </catalyst-tab-group>
+            </div>
+          </div>
+        </div>
+      </div>
+    </catalyst-tab>
+
+    <!-- API Reference Tab -->
+    <catalyst-tab label="API Reference">
+      <div class="api-section">
+        <h3>CatalystIcon API</h3>
+        <div class="divider"></div>
+
+        <h4>Inputs</h4>
+        <div class="table-responsive">
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>icon</code></td>
+                <td><code>string</code></td>
+                <td><strong>Required</strong></td>
+                <td>The name of the registered icon to render.</td>
+              </tr>
+              <tr>
+                <td><code>class</code></td>
+                <td><code>string</code></td>
+                <td><code>''</code></td>
+                <td>
+                  Append custom CSS classes directly to the root icon tag. Aliased as
+                  <code>cssClass</code> internally.
+                </td>
+              </tr>
+              <tr>
+                <td><code>height</code></td>
+                <td><code>string | number</code></td>
+                <td><code>24</code></td>
+                <td>
+                  Sets the height of the SVG. Numbers are treated as `px` suffix automatically.
+                </td>
+              </tr>
+              <tr>
+                <td><code>width</code></td>
+                <td><code>string | number</code></td>
+                <td><code>24</code></td>
+                <td>
+                  Sets the width of the SVG. Numbers are treated as `px` suffix automatically.
+                </td>
+              </tr>
+              <tr>
+                <td><code>color</code></td>
+                <td><code>string</code></td>
+                <td><code>currentColor</code></td>
+                <td>
+                  Sets the CSS color value applied to the style attribute of the inline icon.
+                  Default utilizes CSS cascading logic.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="mt-5">CatalystIconRegistryService API</h3>
+        <div class="divider"></div>
+
+        <h4>Methods</h4>
+        <div class="table-responsive">
+          <table class="api-table">
+            <thead>
+              <tr>
+                <th>Signature</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <code
+                    >registerIcon(name: string, content: string, type: 'svg' | 'url' = 'svg'):
+                    void</code
+                  >
+                </td>
+                <td>
+                  Programatically registers a single standalone icon entity by type (defaults to SVG
+                  strings).
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <code
+                    >registerIcons(icons: {{ '{' }} name: string; svg?: string; url?: string
+                    {{ '}' }}[]): void</code
+                  >
+                </td>
+                <td>
+                  Registers multiple SVG files and URL links collectively through an array
+                  structure.
+                </td>
+              </tr>
+              <tr>
+                <td><code>getIcon(name: string): Observable&lt;string | undefined&gt;</code></td>
+                <td>
+                  Returns an Observable hook to retrieve registered SVG markup (used internally).
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </catalyst-tab>
+  </catalyst-tab-group>
+</app-demo-page-layout>

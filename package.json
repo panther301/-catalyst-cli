@@ -12,6 +12,7 @@
     "build:lib:dynamic-widget": "ng build dynamic-widget",
     "build:lib:stepper": "ng build stepper",
     "build:lib:tab": "ng build catalyst-tab",
+    "build:lib:icon": "ng build catalyst-icon",
     "build:demo": "ng build --base-href /-catalyst-cli/",
     "predeploy": "npm run build:demo",
     "deploy": "npx angular-cli-ghpages --dir=dist/catalyst-cli/browser"

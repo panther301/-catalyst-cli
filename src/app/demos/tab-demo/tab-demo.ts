@@ -193,6 +193,32 @@ setTabIndex(index: number) {
   border-radius: 8px;
 }`;
 
+  // Example 5: Prefix and Suffix
+  prefixSuffixTsCode = `import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-my-tabs',
+  templateUrl: './my-tabs.html',
+})
+export class MyTabsComponent {
+  // Logic for prefix/suffix buttons
+}`;
+
+  prefixSuffixHtmlCode = `<catalyst-tab-group>
+  <!-- Prefix Content (Left) -->
+  <div tabPrefix class="custom-prefix">
+    <button>🔍</button>
+  </div>
+  
+  <!-- Suffix Content (Right) -->
+  <div tabSuffix class="custom-suffix">
+    <button>⚙️</button>
+  </div>
+
+  <catalyst-tab label="General">General settings</catalyst-tab>
+  <catalyst-tab label="Security">Security settings</catalyst-tab>
+</catalyst-tab-group>`;
+
   // API Reference code
   apiConfigCode = `interface TabGroupConfig {
   // Tab orientation: 'horizontal' (default) or 'vertical'
